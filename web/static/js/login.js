@@ -84,7 +84,7 @@ $(function () {
         var username = $("#username").val();
         var userpwd = $("#userpwd").val();
         var issavecookies = "NO";
-        if ($("#save_me").attr("checked") == true) {
+        if ($("#save_me")[0].checked == true) {
             issavecookies = "Yes";
         }
         else {
@@ -128,7 +128,7 @@ $(function () {
                 dataType:"json",
                 success: function (data) {///去更新cookies
                     if (data.state == "0" || data.state == "1") {
-                        window.location.href = "/web/index";
+                        window.location.href = "/page/index_new";
                     } else {
                         swal('登录失败', data.info, 'error');
                     }
