@@ -8,7 +8,7 @@ $(function () {
     if ($.cookie("codeusername") != null) {
         $.ajax({
             type: "POST",
-            url: '/users/AjaxServer/checkis.ashx',
+            url: '/user/checkis',
             data: { typex: 1 },
             async: false,
             success: function (data) {///去更新cookies
@@ -123,15 +123,14 @@ $(function () {
             ///// 手動 登錄
             $.ajax({
                 type: "POST",
-                url: '/users/AjaxServer/Ajax_User_Loading.ashx',
+                url: '/user/login/',
                 data: { username: username, userpwd: userpwd, issavecookies: issavecookies, l_dot: l_dot, typex: 1 },
+                dataType:"json",
                 success: function (data) {///去更新cookies
-                    if (data == "0" || data == "1") {
-                        window.location.href = "http://home.wopop.com/UserHome/ot5lst/website.aspx";
-
+                    if (data.state == "0" || data.state == "1") {
+                        window.location.href = "/web/index";
                     } else {
-                        ot5alert(data, "1");
-
+                        swal('登录失败', data.info, 'error');
                     }
                 }
             });
