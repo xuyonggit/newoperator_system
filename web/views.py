@@ -4,5 +4,6 @@ from django.shortcuts import render, render_to_response
 
 
 def Index(request):
+    print(1)
     pass
 
