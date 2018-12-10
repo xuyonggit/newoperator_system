@@ -15,9 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from user.views import Login
 
 urlpatterns = [
     url(r'^web/', include("web.urls")),
-    url(r'^user/login$', Login)
+    url(r'^user/', include("user.urls"))
 ]

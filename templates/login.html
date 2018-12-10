@@ -1,81 +1,76 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="zh-CN">
-
+<!DOCTYPE>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<title>HTML5响应式第三方登录页面模板</title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
+  <title>运维管理系统</title>
+  <link href="{% static "css/style_log.css" %}" rel="stylesheet" type="text/css">
+  <script src="{% static "js/jquert-3.3.1.min.css" %}" type="text/javascript"></script>
+  <script src="{% static "js/jquery.cookie.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/login.js" %}" type="text/javascript"></script>
 
-	<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
-<body>
+<body class="login" mycollectionplug="bind">
+<div class="login_m">
+<div class="login_logo"><img src="{% static "pic/logo.png" %}" width="196" height="46"></div>
+<div class="login_boder">
 
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-49">登录</span>
+<div class="login_padding" id="login_model">
 
-					<div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
-						<span class="label-input100">用户名</span>
-						<input class="input100" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
-						<span class="focus-input100" data-symbol="&#xf206;"></span>
-					</div>
+  <h2>用 户 名</h2>
+  <label>
+    <input type="text" id="username" class="txt_input txt_input2" onfocus="if (value =='Your name'){value =''}" onblur="if (value ==''){value='Your name'}" value="Your name">
+  </label>
+  <h2>密 码</h2>
+  <label>
+    <input type="password" name="textfield2" id="userpwd" class="txt_input" onfocus="if (value =='******'){value =''}" onblur="if (value ==''){value='******'}" value="******">
+  </label>
 
-					<div class="wrap-input100 validate-input" data-validate="请输入密码">
-						<span class="label-input100">密码</span>
-						<input class="input100" type="password" name="pass" placeholder="请输入密码">
-						<span class="focus-input100" data-symbol="&#xf190;"></span>
-					</div>
 
-					<div class="text-right p-t-8 p-b-31">
-						<a href="javascript:">忘记密码？</a>
-					</div>
 
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">登 录</button>
-						</div>
-					</div>
 
-					<div class="txt1 text-center p-t-54 p-b-20">
-						<span>第三方登录</span>
-					</div>
+  <p class="forgot"><a id="iforget" href="javascript:void(0);">忘记密码？</a></p>
+  <div class="rem_sub">
+  <div class="rem_sub_l">
+  <input type="checkbox" name="checkbox" id="save_me">
+   <label for="checkbox">Remember me</label>
+   </div>
+    <label>
+      <input type="submit" class="sub_button" name="button" id="button" value="登 录" style="opacity: 0.7;">
+    </label>
+  </div>
+</div>
 
-					<div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1">
-							<i class="fa fa-wechat"></i>
-						</a>
 
-						<a href="#" class="login100-social-item bg2">
-							<i class="fa fa-qq"></i>
-						</a>
+<div id="forget_model" class="login_padding" style="display:none">
+<br>
 
-						<a href="#" class="login100-social-item bg3">
-							<i class="fa fa-weibo"></i>
-						</a>
-					</div>
+   <h1>重置密码</h1>
+   <br>
+   <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
+    <label>
+    <input type="text" id="usrmail" class="txt_input txt_input2">
+   </label>
 
-					<div class="flex-col-c p-t-25">
-						<a href="javascript:" class="txt2">立即注册</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="js/main.js"></script>
-</body>
+  <div class="rem_sub">
+  <div class="rem_sub_l">
+   </div>
+    <label>
+     <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="马上重置" style="opacity: 0.7;">
+     　　　
+     <input type="submit" class="sub_button" name="button" id="denglou" value="返 回" style="opacity: 0.7;">　　
 
-</html>
+    </label>
+  </div>
+</div>
+<!--login_padding  Sign up end-->
+</div><!--login_boder end-->
+</div><!--login_m end-->
+ <br> <br>
+
+
+
+</body></html>
