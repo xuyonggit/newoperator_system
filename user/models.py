@@ -18,3 +18,14 @@ class tb_user(models.Model):
     modify_date = models.DateField(auto_now=True)
     # 用户状态 0 为禁用，1 为正常
     status = models.IntegerField(default=0)
+
+
+class tb_resetpwd(models.Model):
+    # ID
+    id = models.AutoField(primary_key=True)
+    # uid
+    userId = models.IntegerField('用户ID', default=None)
+    # onlyId
+    onlyId = models.CharField('唯一标识', max_length=255)
+    # status 0: 正常 1：过期 2： 失效
+    status = models.IntegerField('状态', default=0)

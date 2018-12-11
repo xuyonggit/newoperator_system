@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import uuid
+
 from django.shortcuts import render, render_to_response, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from user.models import tb_user
-import hashlib
+from user.models import tb_user, tb_resetpwd
+from user.user_email import SendMultiEmail
+from user.myFunctions import *
+
 
 @csrf_exempt
 def Login(request):
@@ -20,7 +24,6 @@ def Login(request):
         issavecookies = request.POST.get('issavecookies')
         # 密码加密
         res_passwd = to_md5(passwd)
-        print(issavecookies)
         # get data from database
         userdata = tb_user.objects.get(username=username)
         # 初始化返回数据
@@ -40,18 +43,55 @@ def Login(request):
         return render_to_response("login.html")
 
 
+@csrf_exempt
 def Checkis(request):
+    """
+
+    :param request:
+    :typex  5 - 重置密码
+    :return:
+        错误码：
+        state:  0: 邮件已发送
+                1:邮箱地址重复
+                2:邮箱地址错误
+                1000:未知错误
+    """
     if request.method == 'POST':
-        print(request.POST.get('typex', 1))
-    pass
+        typex = request.POST.get('typex')
+        response_data = {"state": 0}
+        # typex 5 重置密码
+        if int(typex) == 5:
+            usermail = request.POST.get("usermail")
+            database_data = tb_user.objects.filter(email_address=usermail)
+            if len(database_data) == 1:
+                onlyid = makeResetLink(email_address=usermail)
+                if onlyid:
+                    link = "http://{0}/user/reset_password/{1}".format(request.get_host(), onlyid)
+                SendMultiEmail('重置密码', tolist=[usermail], template='Email.html', link=link)
+                response_data['info'] = "邮件已发送"
+            elif len(database_data) > 1:
+                response_data['state'] = 1
+                response_data['info'] = "邮箱地址重复"
+            else:
+                response_data['state'] = 2
+                response_data['info'] = "邮箱地址错误"
+        else:
+            response_data['state'] = 1000
+            response_data['info'] = "未知错误"
+        return HttpResponse(json.dumps(response_data))
 
 
-# md5
-def to_md5(str):
-    md = hashlib.md5()
-    md.update(str.encode('utf-8'))
-    return md.hexdigest()
-
-
-if __name__ == '__main__':
-    print(to_md5('1a'))
+@csrf_exempt
+def ResetPassword(request, onlyid=''):
+    response_data = {"state": 0}
+    # 失效重置ID
+    d = tb_resetpwd.objects.filter(onlyId=onlyid, status=0)
+    if len(d) == 1:
+        userdata = tb_user.objects.get(id=d[0]['userId'])
+        userdata.passwd = 'e10adc3949ba59abbe56e057f20f883e'
+        userdata.save()
+        outUseOnlyId(onlyid)
+    else:
+        response_data['state'] = 1
+        response_data['info'] = '未知错误'
+    return render('passwdResetResult.html', response_data)

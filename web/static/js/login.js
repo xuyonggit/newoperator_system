@@ -43,23 +43,27 @@ $(function () {
     ///取回密码 
     $("#Retrievenow").click(function () {
         var usrmail = $("#usrmail").val();
+        console.log(usrmail);
         if (!Test_email(usrmail)) {
            // alert(msgggg.pssjs1);
             return false;
         }
         $.ajax({
             type: "POST",
-            url: '/users/AjaxServer/checkis.ashx',
-            data: { typex: 5, usrmail: usrmail },
+            url: '/user/checkis/',
+            data: { typex: 5, usermail: usrmail },
+            dataType:"json",
             success: function (data) {//
-
-                alert(data);
-                $("#login_model").show();
-                $("#forget_model").hide();
-                $("#usrmail").val("");
-                $("#username").val("");
-                $("#userpwd").val("");
-
+                if (data.state == 0) {
+                    swal("邮件已发送", data.info, "success");
+                    $("#login_model").show();
+                    $("#forget_model").hide();
+                    $("#username").val("");
+                    $("#userpwd").val("");
+                } else {
+                    swal("邮件发送失败", data.info, "error");
+                    $("#usrmail").val("");
+                }
             }
         });
 
