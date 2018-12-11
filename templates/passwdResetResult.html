@@ -1,10 +1,30 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>密码重置结果</title>
+    <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery-1.10.2.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/sweetalert2.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/result.js" %}" type="text/javascript"></script>
+
 </head>
 <body>
-{{ response_data }}
+<div id="success_model">
+    {% if state == 0 %}
+        <label>
+            <input type="submit" name="button" id="go_login" value="去登录" style="opacity: 0.7;">
+        </label>
+    {% else %}
+        <script type="text/javascript">
+            swal(
+                "重置失败",
+                "{{ info }}",
+                "error"
+            )
+        </script>
+    {% endif %}
+</div>
 </body>
 </html>

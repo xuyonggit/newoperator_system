@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import uuid
 
-from django.shortcuts import render, render_to_response, HttpResponse
+from django.shortcuts import render, render_to_response, HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 import json
-from user.models import tb_user, tb_resetpwd
 from user.user_email import SendMultiEmail
 from user.myFunctions import *
 
@@ -83,15 +82,17 @@ def Checkis(request):
 
 @csrf_exempt
 def ResetPassword(request, onlyid=''):
+    oid = onlyid
     response_data = {"state": 0}
-    # 失效重置ID
-    d = tb_resetpwd.objects.filter(onlyId=onlyid, status=0)
-    if len(d) == 1:
+
+    d = tb_resetpwd.objects.filter(onlyId=oid, status=0).values()
+    if len(d) > 0:
         userdata = tb_user.objects.get(id=d[0]['userId'])
         userdata.passwd = 'e10adc3949ba59abbe56e057f20f883e'
         userdata.save()
+        # 失效重置ID
         outUseOnlyId(onlyid)
     else:
-        response_data['state'] = 1
-        response_data['info'] = '未知错误'
-    return render('passwdResetResult.html', response_data)
+        raise Http404("哎呀~~~ 页面走丢啦！")
+
+    return render(request, 'passwdResetResult.html', {'state': response_data['state'], 'info': response_data.get('info')})
