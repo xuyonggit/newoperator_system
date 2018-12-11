@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'page',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +133,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_DIRS = (
 	'web/static',
+    'page/static',
 )

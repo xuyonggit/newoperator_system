@@ -6,4 +6,4 @@ from django.http import HttpResponse
 def index(request):
     contest = {}
     contest['index'] = '1'
-    return render(request, 'index_new.html', contest)
+    return render(request, 'index.html', contest)
