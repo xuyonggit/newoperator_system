@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'user',
+    'page',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_DIRS = (
 	'web/static',
+    'page/static',
 )
 
 # email module
