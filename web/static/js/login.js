@@ -5,6 +5,9 @@ $(function () {
     }, function () {
         $(this).stop().fadeTo(650, 0.7);
     });
+    $('#registry').click(function () {
+        swal("哈哈", "关我毛事？", "success")
+    });
     if ($.cookie("codeusername") != null) {
         $.ajax({
             type: "POST",
