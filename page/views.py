@@ -7,3 +7,21 @@ def index(request):
     contest = {}
     contest['index'] = '1'
     return render(request, 'index.html', contest)
+
+
+def index_new_2(request):
+    contest = {}
+    contest['index_new_2'] = '1'
+    return render(request, 'index_new_2.html', contest)
+
+
+def index_new_3(request):
+    contest = {}
+    contest['index_new_3'] = '1'
+    return render(request, 'index_new_3.html', contest)
+
+
+def index_new_4(request):
+    contest = {}
+    contest['index_new_4'] = '1'
+    return render(request, 'index_new_4.html', contest)
