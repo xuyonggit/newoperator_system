@@ -36,9 +36,11 @@ def Login(request):
             if userdata.status == 1:
                 response_data = {'state': 3, 'info': '账号被禁用，请联系系统管理员'}
             else:
+                response_data['sessionId'] = makeSessionId(username)
                 print("login success, userid: {}".format(userdata.id))
         return HttpResponse(json.dumps(response_data))
     else:
+        print(makeSessionId())
         return render_to_response("login.html")
 
 

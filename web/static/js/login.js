@@ -108,16 +108,11 @@ $(function () {
                     data: { username: username, userpwd: userpwd, issavecookies: issavecookies, l_dot: l_dot, typex: 2 },
                     success: function (data) {///去更新cookies
                         if (current.indexOf("index.aspx") > -1) {
-
-
                         } else {
-
                             if (data == "0" || data == "1") {
                                 window.location.href = "http://home.wopop.com/UserHome/ot5lst/website.aspx";
-
                             } else {
                                 ot5alert(data, "1");
-
                             }
                         }
                     }
@@ -134,6 +129,7 @@ $(function () {
                 dataType:"json",
                 success: function (data) {///去更新cookies
                     if (data.state == "0" || data.state == "1") {
+                        $.cookie('sessionId', data.sessionId, {path: '/'});
                         window.location.href = "/page/index_new";
                     } else {
                         swal('登录失败', data.info, 'error');
