@@ -127,9 +127,10 @@ html{-webkit-text-size-adjust:none;}
 .login_boder input.txt_input{ width:295px; height:36px; border:1px solid #cad2db; padding:0 5px; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; line-height:36px; margin-bottom:10px; font-size:14px; color:#717171; font-family:Arial;}
 .login_boder input.txt_input2{ margin-bottom:20px;}
 .login_boder input.txt_input:focus{ transition:border linear .2s,box-shadow linear .2s; -moz-transition:border linear .2s,-moz-box-shadow linear .2s; -webkit-transition:border linear .2s,-webkit-box-shadow linear .2s; outline:none;border-color:rgba(173,173,173,75); box-shadow:0 0 8px rgba(173,173,173,.5); -moz-box-shadow:0 0 8px rgba(173,173,173,.5); -webkit-box-shadow:0 0 8px rgba(173,173,173,3); border:1px solid #6192c8;}
-.login_boder p.forgot{ font-size:11px;  text-align:right; margin-bottom:15px;}
+.login_boder p.forgot{ font-size:11px;  text-align:center; margin-bottom:10%;}
 .login_boder p.forgot a,.login_boder p.forgot a:visited{color:#8c8e91;}
 .login_boder p.forgot a:hover{color:#206fd5;}
+
 .rem_sub input.sub_button{ float:right; width:122px; height:32px; background:url(../pic/site_bg.png) no-repeat -153px -850px; border:none; color:#FFF; padding-bottom:2px; font-size:14px; font-weight:bold;}
 
 .rem_sub input.sub_buttons{ float:left; width:122px;  height:32px; background:url(../pic/site_bg.png) no-repeat -153px -850px; border:none; color:#FFF; padding-bottom:2px; font-size:14px; font-weight:bold;}
@@ -142,3 +143,4 @@ html{-webkit-text-size-adjust:none;}
 .focusBox{height:513px;}
 .focusContentBox{height:100%}
 .focusContent{width:1000px;float:left}
+#sending{z-index:1;padding:5px 0 5px 29px;background:url(../pic/loading_2.gif) no-repeat 10px top;left:50%;top:50%;width:8%;position:fixed; height:10%}

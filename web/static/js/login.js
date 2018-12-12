@@ -5,10 +5,13 @@ $(function () {
     }, function () {
         $(this).stop().fadeTo(650, 0.7);
     });
+    $('#registry').click(function () {
+        swal("哈哈", "关我毛事？", "success")
+    });
     if ($.cookie("codeusername") != null) {
         $.ajax({
             type: "POST",
-            url: '/users/AjaxServer/checkis.ashx',
+            url: '/user/checkis',
             data: { typex: 1 },
             async: false,
             success: function (data) {///去更新cookies
@@ -43,23 +46,29 @@ $(function () {
     ///取回密码 
     $("#Retrievenow").click(function () {
         var usrmail = $("#usrmail").val();
+        console.log(usrmail);
         if (!Test_email(usrmail)) {
            // alert(msgggg.pssjs1);
             return false;
-        }
+        };
+        $("#sending").show();
         $.ajax({
             type: "POST",
-            url: '/users/AjaxServer/checkis.ashx',
-            data: { typex: 5, usrmail: usrmail },
+            url: '/user/checkis/',
+            data: { typex: 5, usermail: usrmail },
+            dataType:"json",
             success: function (data) {//
-
-                alert(data);
-                $("#login_model").show();
-                $("#forget_model").hide();
-                $("#usrmail").val("");
-                $("#username").val("");
-                $("#userpwd").val("");
-
+                if (data.state == 0) {
+                    swal("邮件已发送", data.info, "success");
+                    $("#sending").hide();
+                    $("#login_model").show();
+                    $("#forget_model").hide();
+                    $("#username").val("");
+                    $("#userpwd").val("");
+                } else {
+                    swal("邮件发送失败", data.info, "error");
+                    $("#usrmail").val("");
+                }
             }
         });
 
@@ -84,7 +93,7 @@ $(function () {
         var username = $("#username").val();
         var userpwd = $("#userpwd").val();
         var issavecookies = "NO";
-        if ($("#save_me").attr("checked") == true) {
+        if ($("#save_me")[0].checked == true) {
             issavecookies = "Yes";
         }
         else {
@@ -102,16 +111,11 @@ $(function () {
                     data: { username: username, userpwd: userpwd, issavecookies: issavecookies, l_dot: l_dot, typex: 2 },
                     success: function (data) {///去更新cookies
                         if (current.indexOf("index.aspx") > -1) {
-
-
                         } else {
-
                             if (data == "0" || data == "1") {
                                 window.location.href = "http://home.wopop.com/UserHome/ot5lst/website.aspx";
-
                             } else {
                                 ot5alert(data, "1");
-
                             }
                         }
                     }
@@ -123,15 +127,15 @@ $(function () {
             ///// 手動 登錄
             $.ajax({
                 type: "POST",
-                url: '/users/AjaxServer/Ajax_User_Loading.ashx',
+                url: '/user/login/',
                 data: { username: username, userpwd: userpwd, issavecookies: issavecookies, l_dot: l_dot, typex: 1 },
+                dataType:"json",
                 success: function (data) {///去更新cookies
-                    if (data == "0" || data == "1") {
-                        window.location.href = "http://home.wopop.com/UserHome/ot5lst/website.aspx";
-
+                    if (data.state == "0" || data.state == "1") {
+                        $.cookie('sessionId', data.sessionId, {path: '/'});
+                        window.location.href = "/page/index_new";
                     } else {
-                        ot5alert(data, "1");
-
+                        swal('登录失败', data.info, 'error');
                     }
                 }
             });

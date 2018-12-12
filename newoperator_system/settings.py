@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'user',
     'page',
 ]
 
@@ -135,3 +136,10 @@ STATIC_DIRS = (
 	'web/static',
     'page/static',
 )
+
+# email module
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  #调用Django模块 一般不变
+EMAIL_HOST = 'smtp.exmail.qq.com' #邮件服务器，和你发邮件的邮箱相对应。企业用的话一般需要询问一下，每个企业有自己的邮箱服务器配置
+EMAIL_PORT = 25   #端口 一般25
+EMAIL_HOST_USER = 'kefu@gintong.com' #发件箱：<span style="font-family: Arial;">可直接向外发送邮件的私人邮箱 或 </span>帮你向外转发邮件的企业提供的特殊邮箱（企业邮箱）
+EMAIL_HOST_PASSWORD = '6C3P8zIw5joE' #密码
