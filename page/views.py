@@ -25,3 +25,9 @@ def index_new_4(request):
     contest = {}
     contest['index_new_4'] = '1'
     return render(request, 'index_new_4.html', contest)
+
+
+def guanli(request):
+    contest = {}
+    contest['guanli'] = '1'
+    return render(request, 'guanli.html', contest)
