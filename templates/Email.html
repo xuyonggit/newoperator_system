@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,20 @@
     <title>重置密码</title>
 </head>
 <body>
-<p>{{ link }}</p>
+<link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-4 column">
+		</div>
+		<div class="col-md-4 column">
+			<div class="alert alert-dismissable alert-info">
+                <strong>Warning!</strong>  你即将重置账号：<br>&nbsp;&nbsp;&nbsp;&nbsp;{{ user }} 的密码，<br>请点击：
+                <a href="{{ link }}" class="alert-link">立即重置</a>
+			</div>
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+</div>
 </body>
 </html>

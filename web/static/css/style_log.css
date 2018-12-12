@@ -142,3 +142,4 @@ html{-webkit-text-size-adjust:none;}
 .focusBox{height:513px;}
 .focusContentBox{height:100%}
 .focusContent{width:1000px;float:left}
+#sending{z-index:1;padding:5px 0 5px 29px;background:url(../pic/loading_2.gif) no-repeat 10px top;left:50%;top:50%;width:8%;position:fixed; height:10%}

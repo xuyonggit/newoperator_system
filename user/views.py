@@ -66,7 +66,7 @@ def Checkis(request):
                 onlyid = makeResetLink(email_address=usermail)
                 if onlyid:
                     link = "http://{0}/user/reset_password/{1}".format(request.get_host(), onlyid)
-                SendMultiEmail('重置密码', tolist=[usermail], template='Email.html', link=link)
+                SendMultiEmail('重置密码', tolist=[usermail], template='Email.html', link=link, user=usermail)
                 response_data['info'] = "邮件已发送"
             elif len(database_data) > 1:
                 response_data['state'] = 1

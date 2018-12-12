@@ -47,7 +47,8 @@ $(function () {
         if (!Test_email(usrmail)) {
            // alert(msgggg.pssjs1);
             return false;
-        }
+        };
+        $("#sending").show();
         $.ajax({
             type: "POST",
             url: '/user/checkis/',
@@ -56,6 +57,7 @@ $(function () {
             success: function (data) {//
                 if (data.state == 0) {
                     swal("邮件已发送", data.info, "success");
+                    $("#sending").hide();
                     $("#login_model").show();
                     $("#forget_model").hide();
                     $("#username").val("");

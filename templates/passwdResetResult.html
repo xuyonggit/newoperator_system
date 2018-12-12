@@ -7,15 +7,30 @@
     <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet">
     <script src="{% static "js/jquery-1.10.2.js" %}" type="text/javascript"></script>
     <script src="{% static "js/sweetalert2.js" %}" type="text/javascript"></script>
-    <script src="{% static "js/result.js" %}" type="text/javascript"></script>
 
 </head>
-<body>
+<body bgcolor="#00FFFF">
 <div id="success_model">
     {% if state == 0 %}
-        <label>
-            <input type="submit" name="button" id="go_login" value="去登录" style="opacity: 0.7;">
-        </label>
+        <script type="text/javascript">
+            swal({
+                  title: '密码重置成功！',
+                  text: '恭喜您，您的密码已重置为:123456',
+                  type: 'success',
+                  showCancelButton: true,
+                  confirmButtonText: '去登录',
+                  cancelButtonText: '关闭',
+                }).then(function(isConfirm) {
+                  if (isConfirm === true) {
+                      window.location.href = "http://127.0.0.1:8001/page/index_new/"
+                  } else if (isConfirm === false) {
+                      window.close()
+                  } else {
+                    // Esc, close button or outside click
+                    // isConfirm is undefined
+                  }
+                });
+        </script>
     {% else %}
         <script type="text/javascript">
             swal(
