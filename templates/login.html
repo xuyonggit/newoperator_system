@@ -7,11 +7,12 @@
   <title>运维管理系统</title>
   <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet" type="text/css">
   <link href="{% static "css/style_log.css" %}" rel="stylesheet" type="text/css">
+{#    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" type="text/css">#}
 
 
 </head>
 
-<body class="login" mycollectionplug="bind">
+<body class="login">
 <div class="login_m">
 <div class="login_logo"><img src="{% static "pic/logo_2.png" %}" width="196" height="46"></div>
 <div class="login_boder">
@@ -28,7 +29,7 @@
   </label>
 
   <p class="forgot">
-      <a id="registry" href="javascript:void(0);" style="float: left">啥？还没有密码？</a>
+      <a id="registry" href="javascript:void(0);" style="float: left">啥？还没有账号？</a>
       <a id="iforget" href="javascript:void(0);" style="float: right">忘记密码？</a>
   </p>
   <div class="rem_sub">
@@ -66,11 +67,17 @@
     </label>
   </div>
 </div>
-
+<div id="registry_model" class="login_padding" style="display:none">
+    <h1>注册账号</h1>
+    <div class="form-group">
+        <label>First name</label>
+        <input type="text" name="form-first-name" placeholder="用户名" class="txt_input" id="form-first-name">
+    </div>
+</div>
 <!--login_padding  Sign up end-->
 </div><!--login_boder end-->
 </div><!--login_m end-->
- <br> <br>
+
 
 <script src="{% static "js/sweetalert2.js" %}" type="text/javascript"></script>
 <script src="{% static "js/jquery-1.10.2.js" %}" type="text/javascript"></script>

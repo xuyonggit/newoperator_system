@@ -33,23 +33,27 @@ def Login(request):
         else:
             # 密码正确
             # 检测账号是否可用
-            if userdata.status == 1:
+            if userdata.status == 0 and userdata.id != 1:
                 response_data = {'state': 3, 'info': '账号被禁用，请联系系统管理员'}
             else:
-                response_data['sessionId'] = makeSessionId(username)
+                request.session["sessionId"] = username
+                request.session['is_login'] = True
                 print("login success, userid: {}".format(userdata.id))
         return HttpResponse(json.dumps(response_data))
     else:
-        print(makeSessionId())
         return render_to_response("login.html")
 
+
+def Logout(request):
+    request.session.clear()
+    return HttpResponseRedirect("/user/login/")
 
 @csrf_exempt
 def Checkis(request):
     """
 
     :param request:
-    :typex  5 - 重置密码
+    :typex  5 - 重置密码 2 - 检查是否登录
     :return:
         错误码：
         state:  0: 邮件已发送
@@ -76,6 +80,9 @@ def Checkis(request):
             else:
                 response_data['state'] = 2
                 response_data['info'] = "邮箱地址错误"
+        elif int(typex) == 1:
+            if not request.session.get('is_login', False):
+                return HttpResponse("NotLogin")
         else:
             response_data['state'] = 1000
             response_data['info'] = "未知错误"
@@ -98,3 +105,29 @@ def ResetPassword(request, onlyid=''):
         raise Http404("哎呀~~~ 页面走丢啦！")
 
     return render(request, 'passwdResetResult.html', {'state': response_data['state'], 'info': response_data.get('info')})
+
+
+@csrf_exempt
+def create_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        passwd = request.POST.get('passwd')
+        passwd = to_md5(passwd)
+        useremail = request.POST.get('email_address')
+        position = request.POST.get('position', None)
+        # templates
+        # 无效参数
+        template_success = {'state': 0, 'info': '用户创建成功'}
+        template_invalid = {'state': 1, 'info': '无效参数'}
+        template_Exists = {'state': 2, 'info': '用户已存在'}
+        template_error = {'state': 3, 'info': '未知错误'}
+
+        if not username or \
+            not passwd or \
+            not useremail:
+            return HttpResponse(json.dumps(template_invalid))
+        if userExists(useremail):
+            return HttpResponse(json.dumps(template_Exists))
+        createUser(username=username, passwd=passwd, email_address=useremail, position=position)
+        return HttpResponse(json.dumps(template_success))
+

@@ -25,7 +25,7 @@ class tb_resetpwd(models.Model):
     id = models.AutoField(primary_key=True)
     # uid
     userId = models.IntegerField('用户ID', default=None)
-    # onlyId
+    # onlyId 用于动态生成临时重置密码链接
     onlyId = models.CharField('唯一标识', max_length=255)
     # status 0: 正常 1：过期 2： 失效
     status = models.IntegerField('状态', default=0)

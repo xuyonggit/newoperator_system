@@ -143,3 +143,7 @@ EMAIL_HOST = 'smtp.exmail.qq.com' #邮件服务器，和你发邮件的邮箱相
 EMAIL_PORT = 25   #端口 一般25
 EMAIL_HOST_USER = 'kefu@gintong.com' #发件箱：<span style="font-family: Arial;">可直接向外发送邮件的私人邮箱 或 </span>帮你向外转发邮件的企业提供的特殊邮箱（企业邮箱）
 EMAIL_HOST_PASSWORD = '6C3P8zIw5joE' #密码
+
+# session
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 86400
