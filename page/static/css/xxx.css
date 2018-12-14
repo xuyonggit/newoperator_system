@@ -13,6 +13,7 @@
 }
   a:link {
     color: #000000;
+     width:130px;height:30px;
     text-decoration:none;
     }
     a:visited {
@@ -27,3 +28,7 @@
     color: #000000;
     text-decoration:none;
     }
+.fa-angle-down:before {
+  content: "\f107";
+}
+.dropdown-toggle:focus{outline:0}

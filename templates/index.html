@@ -15,8 +15,8 @@
 	<body>
 		<div class="left">
 			<div class="bigTitle">
-                <a href="http://www.gintong.com/index">
-                <img src="{% static "pic/logo.png" %}"width=65% height=22%>
+                <a href="http://www.gintong.com/index" target="_blank" >
+                <img src="{% static "img/logo.png" %}"width=65% height=22%>
                 </a>
             </div>
 			<div class="lines">
@@ -30,18 +30,22 @@
                 {%  block top %}{%  endblock %}
             </div>
 			<div class="thisUser">
-                <a href="http://www.baidu.com">
-                <img src="{% static "pic/baidu.png" %}"width=70% height=15%/>
-                </a>
+
+        <form action="http://www.baidu.com/baidu" target="_blank"><td>
+            <input name=tn type=hidden value=baidu>
+                <a href="http://www.baidu.com/"></a>
+            <input type=text name=word size=15>
+        </td></form>
+
             </div>
 		</div>
 
 		<div style="text-align:center;">
 
         </div>
-			<div class="content">
+			<p class="content">
                 {% block yunwei %}{% endblock %}
-            </div>
+            </p>
 	</body>
 
 </html>

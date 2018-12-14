@@ -23,9 +23,8 @@ body {
 .content {
 	float: right;
 	width: 80%;
-	text-align: center;
+	text-align: left;
 	font-size: 40px;
-	margin-top: 200px;
 }
 
 .leftTiyle {

@@ -4,11 +4,11 @@ from django.http import HttpResponse
 from user.myFunctions import needLogin
 
 
-@needLogin
+
 def index(request):
     contest = {}
     contest['index'] = '1'
-    return render(request, 'index.html', contest)
+    return render(request, 'index_test.html', contest)
 
 
 def index_new_2(request):
