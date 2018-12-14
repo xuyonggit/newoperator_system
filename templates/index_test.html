@@ -5,15 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <title>运维系统</title>
     <!-- load CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300">
-    <link rel="stylesheet" href="{% static "css/bootstp.min.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/xxx.css" %}" />
     <link rel="stylesheet" href="{% static "fontawesome/css/fontawesome-all.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "slick/slick.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "slick/slick-theme.css" %}"/>
     <link rel="stylesheet" href="{% static "css/tooplate-style.css" %}">
+    <link rel="stylesheet" href="{% static "css/buttons.css" %}">
     <script type="text/javascript" src="{% static "js/jquery-1.10.2.js" %}" ></script>
     <script type="{% static "js/test2.js" %}"></script>
     <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this in a modern browser such as latest version of Chrome or Microsoft Edge.");</script>
@@ -25,13 +27,12 @@
         <div class="tm-main-content">
             <div class="container tm-site-header-container">
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-md-col-xl-6 mb-md-0 mb-sm-4 mb-4 tm-site-header-col">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-md-col-xl-6 mb-md-0 mb-sm-4  mb-4 tm-site-header-col ">
                         <div class="left">
 
                             <a href="http://www.gintong.com/index" target="_blank" ><img src="{% static "img/logo.png" %}" width=40% ></a>
-
                             <img src="{% static "img/underline.png" %}" class="img-fluid mb-4">
-                            <p>欢迎来到北京金桐运维部门主页</p>
+
                         </div>
                     </div>
 
@@ -46,28 +47,25 @@
                                             <div class="product__bg"></div>
                                         </div>
                                         <div class="product__description">
-                                            <div class="row mb-3">
-                                                <div class="col-12">
-                                                </div>
-                                            </div>
+
                                             <div class="row">
-                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <a href="https://192.168.1.2/user/main/" target="_blank" class=""><img src="{% static "img/网康.png" %}" width=28% height=22%></a>
-                                                    <a href="https://passport.ucloud.cn/?service=https%3A%2F%2Faccountv2.ucloud.cn%2Fdashboard#login" target="_blank" class=""><img src="{% static "img/ucloud.png" %} " width=28% height=22%></a>
-                                                    <a href="http://jenkins.gintong.com/jenkins/" target="_blank" class=""><img src="{% static "img/jenkins.png" %}" width=28% height=22%></a>
-                                                    <a href="http://doc.gintong.com/login.action?os_destination=%2Findex.action&permissionViolation=true" target="_blank" class=""><img src="{% static "img/confluence.png" %}" width=28% height=22%></a>
-                                                    <a href="http://zabbix.gintong.com/zabbix.php?action=dashboard.view" target="_blank" class=""><img src="{% static "img/zabbix.png" %}" width=28% height=22%></a>
-                                                </div>
+                                                    <a href="https://192.168.1.2/user/main/" target="_blank"  class="button button-primary button-small">网康</a>
+                                                    <a href="https://passport.ucloud.cn/?service=https%3A%2F%2Faccountv2.ucloud.cn%2Fdashboard#login" target="_blank"  class="button button-primary button-small">ucloud</a>
+                                                    <a href="http://jenkins.gintong.com/jenkins/" target="_blank" class="button button-primary button-small">Jenkins</a>
+                                                    <a href="http://doc.gintong.com/login.action?os_destination=%2Findex.action&permissionViolation=true" target="_blank" class="button button-primary button-small">confluence</a>
+                                                    <a href="http://zabbix.gintong.com/zabbix.php?action=dashboard.view" target="_blank"  class="button button-primary button-small">Zabbix</a>
+                                                    <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                                                    <button id="open_btn" class="btn button button-primary button-rounded button-small"><i class="fa fa-plus"></i></button></a>
 
-                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <p>Donec eu lectus ligula. Aenean pulvinar dolor et massa lacinia rhoncus sit amet sed mauris. Aliquam dictum nibh et consequat finibus.</p>
 
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In magna mauris, malesuada ut diam eu, pellentesque fringilla orci.</p>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
 
                                 <div class="grid__item" id="team-link">
                                     <div class="product">
@@ -115,7 +113,8 @@
 
                                                         <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="名称"  required/>
                                                         <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="链接"  required/>
-                                                        <input type="file" id="selectFiles" onchange="dealSelectFiles()" multiple webkitdirectory>
+                                                        <div class="main">
+                                                            <button id="open_btn" class="btn button button-primary button-rounded button-small"><i class="fa fa-plus"></i></button></div>
                                                         <canvas id="myCanvas" width=1440 height=900></canvas>
                                                     </div>
                                                 </div>
@@ -155,12 +154,13 @@
                                                     <div class="col-12">
                                                         <form action="index.html" method="post" class="contact-form">
                                                             <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+
+                                                            </div>
+                                                            <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                                   <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 tm-col-email">
+                                                            </div>
+                                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 tm-col-email">
                                                                   <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
-                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                               <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea>
@@ -178,16 +178,36 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- .tm-main-content -->
-    </div>
-    <!-- load JS -->
-    <script src="{% static "js/jquery-3.2.1.slim.min.js" %}" ></script>         <!-- https://jquery.com/ -->
-    <script src="{% static "slick/slick.min.js "%}" ></script>                  <!-- http://kenwheeler.github.io/slick/ -->
-    <script src="{% static "js/anime.min.js "%}" ></script>                     <!-- http://animejs.com/ -->
-    <script src="{% static "js/main.js "%}" ></script>
-    <script>
+        </div>
+</div>
 
-        function setupFooter() {
+<div id="light" class="white_content">
+
+<div class="modal-dialog" role="document">
+    <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="btn button button-primary button-rounded button-small">关闭</a>
+        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
+        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
+<button type="submit" class="btn btn-primary tm-btn-submit">Submit</button>
+
+</div>
+</div>
+<div id="fade" class="black_overlay"></div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="{% static "js/jquery-3.2.1.slim.min.js" %}" ></script>
+    <script src="{% static "slick/slick.min.js "%}" ></script>
+    <script src="{% static "js/anime.min.js" %}"></script>
+    <script src="{% static "js/main.js "%}" ></script>
+        <script>function setupFooter() {
             var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
 
             var main = $('.tm-main-content');
@@ -199,9 +219,6 @@
                 main.removeClass('tm-footer-relative');
             }
         }
-
-        /* DOM is ready
-        ------------------------------------------------*/
         $(function(){
 
             setupFooter();
@@ -210,8 +227,9 @@
                 setupFooter();
             });
 
-            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+            $('.tm-current-year').text(new Date().getFullYear());
         });
+
 
     </script>
 
