@@ -490,7 +490,7 @@ transition: all .2s ease-in-out;
 	background-image: none
 }
 .btn-default.disabled, .btn-default.disabled.active, .btn-default.disabled:active, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled], .btn-default[disabled].active, .btn-default[disabled]:active, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default.active, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover {
-	background-color: #fafafa;
+	background-color: #4e66fa;
 	border-color: #ededed
 }
 .btn-default .badge {
@@ -1575,7 +1575,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', end
 	text-align: left
 }
 .ui-slider .ui-slider-handle {
-	background: url(../images/jquery-ui/picker.png);
+	background: url(../pic/baidu.png);
 	position: absolute;
 	z-index: 2;
 	width: 17px;
