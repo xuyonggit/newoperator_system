@@ -48,6 +48,13 @@ def Logout(request):
     request.session.clear()
     return HttpResponseRedirect("/user/login/")
 
+
+@csrf_exempt
+def Registry(request):
+    pass
+    return render_to_response("registry.html")
+
+
 @csrf_exempt
 def Checkis(request):
     """

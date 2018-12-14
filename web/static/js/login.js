@@ -1,5 +1,4 @@
 $(function () {
-    $.backstretch("../pic/bg-01.jpg");
     $('#button,#Retrievenow,#denglou').css('opacity', 0.7).hover(function () {
         $(this).stop().fadeTo(650, 1);
     }, function () {

@@ -7,7 +7,7 @@
   <title>运维管理系统</title>
   <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet" type="text/css">
   <link href="{% static "css/style_log.css" %}" rel="stylesheet" type="text/css">
-{#    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" type="text/css">#}
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" type="text/css">
 
 
 </head>
@@ -70,8 +70,12 @@
 <div id="registry_model" class="login_padding" style="display:none">
     <h1>注册账号</h1>
     <div class="form-group">
-        <label>First name</label>
-        <input type="text" name="form-first-name" placeholder="用户名" class="txt_input" id="form-first-name">
+        <label>First name
+        <input type="text" name="form-first-name" placeholder="用户名" class="txt_input" id="form-first-name"></label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+        </div>
     </div>
 </div>
 <!--login_padding  Sign up end-->
