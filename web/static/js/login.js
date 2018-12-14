@@ -17,7 +17,7 @@ $(function () {
                     ///沒有登錄
                     getLogStatx(2); //没有记录cookies 的登录状态
                 } else {
-                    window.location.href = "/page/index_new";
+                    window.location.href = "/page/index";
                 }
             }
         });
@@ -114,7 +114,7 @@ $(function () {
                         if (current.indexOf("index.aspx") > -1) {
                         } else {
                             if (data == "0" || data == "1") {
-                                window.location.href = "/page/index_new";
+                                window.location.href = "/page/index";
                             } else {
                                 ot5alert(data, "1");
                             }
@@ -136,7 +136,7 @@ $(function () {
                         // $.cookie('sessionId', data.sessionId, {path: '/'});
                         $.cookie('codeusername', username);
                         $.cookie('codeppsd', userpwd);
-                        window.location.href = "/page/index_new";
+                        window.location.href = "/page/index";
                     } else {
                         swal('登录失败', data.info, 'error');
                     }
