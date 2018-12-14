@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from user.models import tb_user, tb_resetpwd
 
 
+
 # 检查登录状态
 def needLogin(func):
     """
@@ -13,8 +14,7 @@ def needLogin(func):
     :return:
     """
     def warpper(request, *args, **kwargs):
-        sessionId = request.COOKIES.get("sessionId", False)
-        if sessionId and checkSessionId(sessionId):
+        if request.session.get("is_login", None):
             return func(request, *args, **kwargs)
         else:
             return HttpResponseRedirect("/user/login/")
@@ -67,23 +67,37 @@ def outUseOnlyId(onlyId):
     return True
 
 
-def makeSessionId(st='gintong'):
+# create user
+def createUser(username, passwd, email_address, position=None):
     """
-    创建sessionId
-    :param st: 任意字符串
-    :return: sessionId
+    创建新用户
+    :param username: 用户名
+    :param passwd: 密码
+    :param email_address: 邮箱地址
+    :param position: 职位
+    :return: boolean
     """
-    import time, hashlib, string
-    m = hashlib.md5()
-    m.update('this is my operator system-Gintong'.encode())
-    m.update(str(time.time()).encode())
-    m.update(str(st).encode())
-    return m.hexdigest()
-
-
-def saveSessionId(sessionId):
-    pass
-
-
-def checkSessionId(sessionId):
+    tb_user.objects.create(
+        username=username,
+        passwd=passwd,
+        email_address=email_address,
+        position=position,
+        status=0
+    )
     return True
+
+
+# check exists user
+def userExists(email_address):
+    """
+    判断用户是否存在，以邮箱地址为主
+    :param email_address:
+    :return: boolean
+    """
+    address = email_address
+    if not address:
+        raise ValueError('无效的address: {}'.format(address))
+    d = tb_user.objects.filter(email_address=address)
+    if len(d) > 0:
+        return True
+    return False

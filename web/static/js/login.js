@@ -1,31 +1,26 @@
 $(function () {
-
     $('#button,#Retrievenow,#denglou').css('opacity', 0.7).hover(function () {
         $(this).stop().fadeTo(650, 1);
     }, function () {
         $(this).stop().fadeTo(650, 0.7);
     });
-    $('#registry').click(function () {
-        swal("哈哈", "关我毛事？", "success")
-    });
     if ($.cookie("codeusername") != null) {
+        // $("#username").val($.cookie("codeusername"));
+        // $("#password").val($.cookie("codeppsd"));
         $.ajax({
             type: "POST",
-            url: '/user/checkis',
+            url: '/user/checkis/',
             data: { typex: 1 },
             async: false,
             success: function (data) {///去更新cookies
                 if (data == "NotLogin") {
                     ///沒有登錄
                     getLogStatx(2); //没有记录cookies 的登录状态
-
                 } else {
-                    window.location.href = "http://home.wopop.com/UserHome/ot5lst/website.aspx";
+                    window.location.href = "/page/index_new";
                 }
             }
         });
-
-
     }
     $("#button").click(function () {
         var username = $("#username").val();
@@ -33,7 +28,12 @@ $(function () {
         if (username.length > 0 && userpwd.length > 0) {
             getLogStatx(1);
         }
+    });
 
+    //// 用户注册
+    $('#registry').click(function () {
+        $("#login_model").hide();
+        $("#registry_model").show();
     });
 
     ////忘记密码
@@ -97,7 +97,7 @@ $(function () {
             issavecookies = "Yes";
         }
         else {
-            issavecookies = "NO";
+            issavecookies = "NO";issavecookies
         }
         var l_dot = screenwidth + "*" + screenheight;
         if (typex == "2") {
@@ -107,13 +107,14 @@ $(function () {
                 userpwd = $.cookie('codeppsd');
                 $.ajax({
                     type: "POST",
-                    url: '/users/AjaxServer/Ajax_User_Loading.ashx',
+                    url: '/user/login/',
                     data: { username: username, userpwd: userpwd, issavecookies: issavecookies, l_dot: l_dot, typex: 2 },
+                    dataType:"json",
                     success: function (data) {///去更新cookies
                         if (current.indexOf("index.aspx") > -1) {
                         } else {
                             if (data == "0" || data == "1") {
-                                window.location.href = "http://home.wopop.com/UserHome/ot5lst/website.aspx";
+                                window.location.href = "/page/index_new";
                             } else {
                                 ot5alert(data, "1");
                             }
@@ -131,8 +132,10 @@ $(function () {
                 data: { username: username, userpwd: userpwd, issavecookies: issavecookies, l_dot: l_dot, typex: 1 },
                 dataType:"json",
                 success: function (data) {///去更新cookies
-                    if (data.state == "0" || data.state == "1") {
-                        $.cookie('sessionId', data.sessionId, {path: '/'});
+                    if (data.state == "0" || data.state == "1" && issavecookies == "Yes") {
+                        // $.cookie('sessionId', data.sessionId, {path: '/'});
+                        $.cookie('codeusername', username);
+                        $.cookie('codeppsd', userpwd);
                         window.location.href = "/page/index_new";
                     } else {
                         swal('登录失败', data.info, 'error');
