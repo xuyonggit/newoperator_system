@@ -18,8 +18,9 @@
 <div class="login_boder">
 
 <div class="login_padding" id="login_model">
-
+{% block name %}
   <h2>用 户 名</h2>
+{% endblock %}
   <label>
     <input type="text" id="username" class="txt_input txt_input2" onfocus="if (value =='Your name'){value =''}" onblur="if (value ==''){value='Your name'}" value="Your name">
   </label>
