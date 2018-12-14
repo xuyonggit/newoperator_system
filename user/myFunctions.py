@@ -2,7 +2,7 @@
 import hashlib
 import uuid
 from django.http import HttpResponseRedirect
-from user.models import tb_user, tb_resetpwd
+from user.models import tb_user, tb_resetpwd, tb_registry_code
 
 
 
@@ -68,12 +68,13 @@ def outUseOnlyId(onlyId):
 
 
 # create user
-def createUser(username, passwd, email_address, position=None):
+def createUser(username, passwd, email_address, inviteId, position=None):
     """
     创建新用户
     :param username: 用户名
     :param passwd: 密码
     :param email_address: 邮箱地址
+    :param inviteId: 邀请者id
     :param position: 职位
     :return: boolean
     """
@@ -82,7 +83,7 @@ def createUser(username, passwd, email_address, position=None):
         passwd=passwd,
         email_address=email_address,
         position=position,
-        status=0
+        status=1
     )
     return True
 
@@ -101,3 +102,23 @@ def userExists(email_address):
     if len(d) > 0:
         return True
     return False
+
+
+def checkRegistryCode(code):
+    code = code
+    try:
+        red = tb_registry_code.objects.filter(registry_code=code, status=0).get()
+        return red.userId
+    except:
+        return False
+
+
+def invialdRegistryCode(code):
+    code = code
+    try:
+        red = tb_registry_code.objects.filter(registry_code=code).get()
+        red.status = 1
+        red.save()
+    except Exception as e:
+        print(e)
+        pass

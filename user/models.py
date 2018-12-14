@@ -18,6 +18,8 @@ class tb_user(models.Model):
     modify_date = models.DateField(auto_now=True)
     # 用户状态 0 为禁用，1 为正常
     status = models.IntegerField(default=0)
+    # 邀请人ID
+    inviteId = models.IntegerField('邀请人ID', default=0)
 
 
 class tb_resetpwd(models.Model):
@@ -28,4 +30,18 @@ class tb_resetpwd(models.Model):
     # onlyId 用于动态生成临时重置密码链接
     onlyId = models.CharField('唯一标识', max_length=255)
     # status 0: 正常 1：过期 2： 失效
+    status = models.IntegerField('状态', default=0)
+
+
+class tb_registry_code(models.Model):
+    """
+    邀请码
+    """
+    # ID
+    id = models.AutoField(primary_key=True)
+    # uid
+    userId = models.IntegerField('邀请者ID', default=None)
+    # code
+    registry_code = models.IntegerField('用户ID', default=None)
+    # status 0: 正常 1：失效
     status = models.IntegerField('状态', default=0)
