@@ -5,16 +5,16 @@
     <head>
 
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Registry</title>
 
         <!-- CSS -->
+        <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
 		<link rel="stylesheet" href="{% static "css/form-elements.css" %}">
         <link rel="stylesheet" href="{% static "css/buttons.css" %}">
-        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="stylesheet" href="{% static "css/registry_style.css" %}">
 
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,16 +33,24 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <a class="logo" href="index.html"></a>
-                            <h1><strong>Bootstrap</strong> Modal Registration Form</h1>
-                            <div class="description">
-                            	<p>
-	                            	This is a free responsive modal registration form made with Bootstrap.
-	                            	Download it on <a href="#"><strong>AZMIND</strong></a>, customize and use it as you like!
-                            	</p>
+                            <a class="logo" href="#"></a>
+                            <h1 style="text-align: left"><font color="white"><strong>请阅读提示：</strong></font></h1>
+                            <div class="nav-body-box">
+                                欢迎注册金桐运维管理系统，出于安全考虑，请仔细阅读以下条款：<br>
+                                1、傻逼<br>
+                                2、逗比<br>
+                                3、逗比<br>
+                                4、逗比<br>
+                                5、逗比<br>
+                                6、逗比<br>
+                                7、逗比<br>
+                                8、逗比<br>
+
+
                             </div>
                             <div class="top-big-link">
-                            	<a class="btn btn-link-1" href="#" data-modal-id="modal-register">Launch modal</a>
+                            	<a class="button button-3d button-action button-pill launch-modal" href="#" data-modal-id="modal-register">开始注册</a>
+                                <a class="button button-3d button-royal button-pill" href="/user/login">返回登录</a>
                             </div>
                         </div>
                     </div>
@@ -59,35 +67,44 @@
         				<button type="button" class="close" data-dismiss="modal">
         					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
         				</button>
-        				<h3 class="modal-title" id="modal-register-label">Sign up now</h3>
-        				<p>Fill in the form below to get instant access:</p>
+        				<h3 class="modal-title" id="modal-register-label">马上注册</h3>
+        				<p>请完善以下信息：</p>
         			</div>
-
         			<div class="modal-body">
-
-	                    <form role="form" action="" method="post" class="registration-form">
+	                    <form role="form" action="" method="post" class="registration-form" id="registration-form">
 	                    	<div class="form-group">
-	                    		<label class="sr-only" for="form-first-name">First name</label>
-	                        	<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+	                    		<label class="col-sm-2 control-label" for="form-first-name">用户名</label>
+                                <div class="col-sm-7" style="width:75%;padding-bottom:10px">
+	                        	    <input type="text" name="form-username" placeholder="User name..." class="form-first-name form-control" id="form-username">
+                                </div>
 	                        </div>
 	                        <div class="form-group">
-	                        	<label class="sr-only" for="form-last-name">Last name</label>
-	                        	<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+	                        	<label class="col-sm-2 control-label" for="form-last-name">密码</label>
+                                <div class="col-sm-7" style="width:75%;padding-bottom:10px">
+	                        	    <input type="password" name="form-password" placeholder="Password..." class="form-last-name form-control" id="form-password" style="height: 50px;padding: 0 20px">
+                                </div>
 	                        </div>
 	                        <div class="form-group">
-	                        	<label class="sr-only" for="form-email">Email</label>
-	                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+	                        	<label class="col-sm-2 control-label" for="form-email">Email</label>
+                                <div class="col-sm-7" style="width:75%;padding-bottom:10px">
+	                        	    <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                </div>
 	                        </div>
 	                        <div class="form-group">
-	                        	<label class="sr-only" for="form-about-yourself">About yourself</label>
-	                        	<textarea name="form-about-yourself" placeholder="About yourself..."
-	                        				class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+	                        	<label class="col-sm-2 control-label" for="form-email">邀请码</label>
+                                <div class="col-sm-7" style="width:75%;padding-bottom:10px">
+	                        	    <input type="text" name="form-code" placeholder="code..." class="form-email form-control" id="form-code">
+                                </div>
 	                        </div>
-	                        <button type="submit" class="btn">Sign me up!</button>
+                            <div class="form-group">
+	                        	<label class="col-sm-2 control-label" for="form-email">职位</label>
+                                <div class="col-sm-7" style="width:75%;padding-bottom:10px">
+	                        	    <input type="text" name="form-position" placeholder="position..." class="form-email form-control" id="form-position">
+                                </div>
+	                        </div>
+	                        <button type="submit" class="btn">提交信息</button>
 	                    </form>
-
         			</div>
-
         		</div>
         	</div>
         </div>
@@ -98,7 +115,7 @@
         <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
         <script src="{% static "js/jquery.backstretch.min.js" %}"></script>
         <script src="{% static "js/registry_scripts.js" %}"></script>
-
+        <script src="{% static "js/sweetalert2.js" %}" type="text/javascript"></script>
     </body>
 
 </html>

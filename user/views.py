@@ -117,24 +117,33 @@ def ResetPassword(request, onlyid=''):
 @csrf_exempt
 def create_user(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        passwd = request.POST.get('passwd')
+        username = request.POST.get('form-username')
+        passwd = request.POST.get('form-password')
         passwd = to_md5(passwd)
-        useremail = request.POST.get('email_address')
-        position = request.POST.get('position', None)
+        code = request.POST.get('form-code')
+        useremail = request.POST.get('form-email')
+        position = request.POST.get('form-position', None)
         # templates
         # 无效参数
         template_success = {'state': 0, 'info': '用户创建成功'}
         template_invalid = {'state': 1, 'info': '无效参数'}
         template_Exists = {'state': 2, 'info': '用户已存在'}
-        template_error = {'state': 3, 'info': '未知错误'}
+        template_incalidcode = {'state': 3, 'info': '邀请码无效'}
+        template_error = {'state': 4, 'info': '未知错误'}
 
         if not username or \
             not passwd or \
             not useremail:
             return HttpResponse(json.dumps(template_invalid))
+        # 判断用户是否存在
         if userExists(useremail):
             return HttpResponse(json.dumps(template_Exists))
-        createUser(username=username, passwd=passwd, email_address=useremail, position=position)
+        # 检查邀请码
+        if checkRegistryCode(code):
+            # 创建用户
+            createUser(username=username, passwd=passwd, email_address=useremail, inviteId=code, position=position)
+            # 失效邀请码
+            invialdRegistryCode(code)
+        else:
+            return HttpResponse(json.dumps(template_incalidcode))
         return HttpResponse(json.dumps(template_success))
-
