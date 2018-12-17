@@ -37,10 +37,13 @@ def Login(request):
             if userdata.status == 0 and userdata.id != 1:
                 response_data = {'state': 3, 'info': '账号被禁用，请联系系统管理员'}
             else:
-                request.session["sessionId"] = username
-                request.session.set_expiry(600)   # session 过期时间 0 : 关闭浏览器即失效
-                request.session['is_login'] = True
-                print("login success, userid: {}".format(userdata.id))
+                sessionId = create_sessionId(userid=userdata.id)
+                # request.session["sessionId"] = username
+                # request.session.set_expiry(0)   # session 过期时间 0 : 关闭浏览器即失效
+                # request.session['is_login'] = True
+                print(sessionId)
+                response_data['sessionId'] = sessionId
+                print("login success, userid: {}, sessionId: {}".format(userdata.id, response_data['sessionId']))
         return HttpResponse(json.dumps(response_data))
     else:
         return render_to_response("login.html")

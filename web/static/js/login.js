@@ -112,6 +112,7 @@ $(function () {
                         if (current.indexOf("index.aspx") > -1) {
                         } else {
                             if (data == "0" || data == "1") {
+                                $.cookie('sessionId', data.sessionId, {path: '/'});
                                 window.location.href = "/page/index";
                             } else {
                                 ot5alert(data, "1");
@@ -131,7 +132,7 @@ $(function () {
                 dataType:"json",
                 success: function (data) {///去更新cookies
                     if (data.state == "0" || data.state == "1" && issavecookies == "Yes") {
-                        // $.cookie('sessionId', data.sessionId, {path: '/'});
+                        $.cookie('sessionId', data.sessionId, {path: '/'});
                         $.cookie('codeusername', username);
                         $.cookie('codeppsd', userpwd);
                         window.location.href = "/page/index";

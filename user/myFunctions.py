@@ -3,7 +3,7 @@ import hashlib
 import uuid
 from django.http import HttpResponseRedirect
 from user.models import tb_user, tb_resetpwd, tb_registry_code
-
+from user.session import Mysessionbase
 
 
 # 检查登录状态
@@ -18,8 +18,9 @@ def needLogin(func):
             sessionid = request.META['HTTP_SESSIONID']
         except:
             sessionid = request.session.session_key
-        request.session.clear_expired()
-        if request.session.exists(sessionid):
+            print(request.session._session)
+        Mysessionbase().clear_expired()
+        if Mysessionbase(sessionid).exists():
             return func(request, *args, **kwargs)
         else:
             return HttpResponseRedirect("/user/login/")
@@ -129,5 +130,7 @@ def invialdRegistryCode(code):
         pass
 
 
-def create_sessionId(val='gintong'):
-    values = val
+def create_sessionId(userid, val='gintong'):
+    # M = Mysessionbase()
+    sessionid = Mysessionbase().create(userid=userid, username=val)
+    return sessionid
