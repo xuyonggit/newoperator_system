@@ -32,6 +32,7 @@
                             <a href="http://www.gintong.com/index" target="_blank" ><img src="{% static "img/logo.png" %}" width=40% ></a>
                             <img src="{% static "img/underline.png" %}" class="img-fluid mb-4">
                             <!img src="{% static "img/1.gif" %}" width=100% height=280px>
+                            <p>{{ b }}</p>
                         </div>
                     </div>
 
@@ -160,28 +161,22 @@
 <div id="light" class="white_content">
 
 <div class="modal-dialog" role="document">
-        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="名字"  required/>
-        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="链接"  required/>
-    <div class="a">
-            <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="button button-primary button-rounded button-small">
-                <font color="#F8FCFE">保存</font></a>
-            <div class="b">
-                <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="button button-primary button-rounded button-small">
-                    <font color="#F8FCFE">退出</font>
-                </a>
-            </div>
-    </div>
+    <form action='/page/names/' method="POST">
+        <input type="text" id="uname" name="uname" class="form-control" placeholder="名字"  required/>
+        <input type="text" id="links" name="links" class="form-control" placeholder="链接"  required/>
+        <button type="submit">aaa</button>
+{#    <!div class="a">#}
+{#            <!div class="b">#}
+{#                <!a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="button button-primary button-rounded button-small">#}
+{#                    <!font color="#F8FCFE">退出</font>#}
+{#                <!/a>#}
+{#            <!/div>#}
+{#    <!/div>#}
+    </form>
 </div>
 </div>
 
 <div id="fade" class="black_overlay"></div>
-
-
-
-
-
-
-
 
 
     <script src="{% static "js/jquery-3.2.1.slim.min.js" %}" ></script>
