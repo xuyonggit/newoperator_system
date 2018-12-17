@@ -8,6 +8,7 @@ from user.user_email import SendMultiEmail
 from user.myFunctions import *
 
 
+
 @csrf_exempt
 def Login(request):
     """
@@ -24,7 +25,7 @@ def Login(request):
         # 密码加密
         res_passwd = to_md5(passwd)
         # get data from database
-        userdata = tb_user.objects.get(username=username)
+        userdata = tb_user.objects.filter(username=username).get()
         # 初始化返回数据
         response_data = {'state': 0, 'info': 'success'}
         # 密码比对
@@ -37,6 +38,7 @@ def Login(request):
                 response_data = {'state': 3, 'info': '账号被禁用，请联系系统管理员'}
             else:
                 request.session["sessionId"] = username
+                request.session.set_expiry(600)   # session 过期时间 0 : 关闭浏览器即失效
                 request.session['is_login'] = True
                 print("login success, userid: {}".format(userdata.id))
         return HttpResponse(json.dumps(response_data))
@@ -44,8 +46,14 @@ def Login(request):
         return render_to_response("login.html")
 
 
+@csrf_exempt
 def Logout(request):
-    request.session.clear()
+    # request.session.clear()
+    try:
+        sessionid = request.META['HTTP_SESSIONID']
+    except:
+        sessionid = request.session.session_key
+    request.session.delete(sessionid)
     return HttpResponseRedirect("/user/login/")
 
 

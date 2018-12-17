@@ -2,9 +2,11 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from user.myFunctions import needLogin
+from django.views.decorators.csrf import csrf_exempt
 
 
-
+@needLogin
+@csrf_exempt
 def index(request):
     contest = {}
     contest['index'] = '1'

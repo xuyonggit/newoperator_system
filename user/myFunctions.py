@@ -14,7 +14,12 @@ def needLogin(func):
     :return:
     """
     def warpper(request, *args, **kwargs):
-        if request.session.get("is_login", None):
+        try:
+            sessionid = request.META['HTTP_SESSIONID']
+        except:
+            sessionid = request.session.session_key
+        request.session.clear_expired()
+        if request.session.exists(sessionid):
             return func(request, *args, **kwargs)
         else:
             return HttpResponseRedirect("/user/login/")
@@ -122,3 +127,7 @@ def invialdRegistryCode(code):
     except Exception as e:
         print(e)
         pass
+
+
+def create_sessionId(val='gintong'):
+    values = val

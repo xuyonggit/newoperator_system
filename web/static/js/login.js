@@ -4,6 +4,7 @@ $(function () {
     }, function () {
         $(this).stop().fadeTo(650, 0.7);
     });
+    
     if ($.cookie("codeusername") != null) {
         // $("#username").val($.cookie("codeusername"));
         // $("#password").val($.cookie("codeppsd"));
@@ -31,10 +32,7 @@ $(function () {
     });
 
     //// 用户注册
-    $('#registry').click(function () {
-        $("#login_model").hide();
-        $("#registry_model").show();
-    });
+
 
     ////忘记密码
     $("#iforget").click(function () {
