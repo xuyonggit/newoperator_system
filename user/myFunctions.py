@@ -17,8 +17,7 @@ def needLogin(func):
         try:
             sessionid = request.META['HTTP_SESSIONID']
         except:
-            sessionid = request.session.session_key
-            print(request.session._session)
+            sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
         Mysessionbase().clear_expired()
         if Mysessionbase(sessionid).exists():
             return func(request, *args, **kwargs)
@@ -134,3 +133,7 @@ def create_sessionId(userid, val='gintong'):
     # M = Mysessionbase()
     sessionid = Mysessionbase().create(userid=userid, username=val)
     return sessionid
+
+
+def clearSessionId(sessionid):
+    Mysessionbase().clear(sessionid=sessionid)

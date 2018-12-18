@@ -55,8 +55,8 @@ def Logout(request):
     try:
         sessionid = request.META['HTTP_SESSIONID']
     except:
-        sessionid = request.session.session_key
-    request.session.delete(sessionid)
+        sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+        clearSessionId(sessionid)
     return HttpResponseRedirect("/user/login/")
 
 

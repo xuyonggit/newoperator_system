@@ -18,8 +18,11 @@ class Mysessionbase(object):
 
     def save(self, userid):
         if self.session_key is None:
-            return self.create()
+            return self.create(userid=userid)
         expired_date = timezone.now() + timezone.timedelta(seconds=SESSION_COOKIE_AGE)
+        # clear old sessionId
+        session.objects.filter(userId=userid).delete()
+        # create new sessionId
         session.objects.create(
             userId=userid,
             sessionId=self.session_key,
@@ -43,11 +46,22 @@ class Mysessionbase(object):
         except session.DoesNotExist:
             pass
 
-    def exists(self):
-        return session.objects.filter(sessionId=self.session_key).exists()
+    def exists(self, sessionid=None):
+        """
+        判断sessionId是否存在
+        :return: boolean
+        """
+        if not sessionid:
+            sessionid = self.session_key
+        return session.objects.filter(sessionId=sessionid).exists()
 
-    def clear(self):
-        pass
+    def clear(self, sessionid):
+        """
+        删除sessionId
+        :param sessionid:
+        :return:
+        """
+        session.objects.filter(sessionId=sessionid).delete()
 
     def clear_expired(self):
         session.objects.filter(expire_date__lt=timezone.now()).delete()
