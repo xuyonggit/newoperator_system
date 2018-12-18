@@ -13,7 +13,7 @@ def index(request):
     # print(data.values())
     for i in data.values():
         print(i)
-    return render(request, 'index_test.html', context={'data': data.values()})
+    return render(request, 'index.html', context={'data': data.values()})
 
 
 @csrf_exempt
@@ -28,9 +28,10 @@ def names(request):
                 username=uname,
                 urls=links
             )
-            return HttpResponse(json.dumps({"state": 0}))
-
+            response_data = {'state': 0, 'info': '保存成功'}
         else:
-            return HttpResponse(json.dumps({"state": 1}))
+            response_data = {'state': 1, 'info': '保存失败'}
+        return HttpResponse(json.dumps(response_data))
+
     else:
-        return render(request, 'index_test.html')
+        return render(request, 'index.html')

@@ -1486,6 +1486,25 @@
   padding: 0 30px;
 }
 
+.button-new_small {
+  font-size: 11px;
+  height: 30px;
+  line-height: 25px;
+  padding: 0 53px;
+}
+
+.button-new_small1 {
+  font-size: 11px;
+  height: 30px;
+  line-height: 28px;
+  padding: 0 59px;
+  background:rgba(1,1,1,0);
+  border:1px;
+  border-color: #666;
+  border-style: dashed;
+
+}
+
 .button-tiny {
   font-size: 9.6px;
   height: 24px;
