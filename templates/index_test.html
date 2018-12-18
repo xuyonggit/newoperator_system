@@ -49,13 +49,12 @@
                                         <div class="product__description">
 
                                             <div class="row">
-                                                    <a href="https://192.168.1.2/user/main/" target="_blank"  class="btn button button-primary button-rounded button-small">网康</a>
-                                                    <a href="https://passport.ucloud.cn/?service=https%3A%2F%2Faccountv2.ucloud.cn%2Fdashboard#login" target="_blank"  class="btn button button-primary button-rounded button-small">ucloud</a>
-                                                    <a href="http://jenkins.gintong.com/jenkins/" target="_blank" class="btn button button-primary button-rounded button-small">Jenkins</a>
-                                                    <a href="http://doc.gintong.com/login.action?os_destination=%2Findex.action&permissionViolation=true" target="_blank" class="btn button button-primary button-rounded button-small">confluence</a>
-                                                    <a href="http://zabbix.gintong.com/zabbix.php?action=dashboard.view" target="_blank"  class="btn button button-primary button-rounded button-small">Zabbix</a>
+                                                    {% for i in data %}
+                                                        <a href="{{ i.urls }}" target="_blank"  class="btn button button-primary button-rounded button-small">{{ i.username }}</a>
+                                                    {% endfor %}
                                                     <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
                                                     <button id="open_btn" class="btn button button-primary button-rounded button-small"><i class="fa fa-plus"></i></button></a>
+
                                             </div>
                                         </div>
                                     </div>
