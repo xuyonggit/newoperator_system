@@ -63,6 +63,11 @@ class Mysessionbase(object):
         """
         session.objects.filter(sessionId=sessionid).delete()
 
+    def getUidfromSessionId(self, sessionid):
+        if not sessionid:
+            sessionid = self.session_key
+        return session.objects.filter(sessionId=sessionid).get().userId
+
     def clear_expired(self):
         session.objects.filter(expire_date__lt=timezone.now()).delete()
 

@@ -41,7 +41,6 @@ def Login(request):
                 # request.session["sessionId"] = username
                 # request.session.set_expiry(0)   # session 过期时间 0 : 关闭浏览器即失效
                 # request.session['is_login'] = True
-                print(sessionId)
                 response_data['sessionId'] = sessionId
                 print("login success, userid: {}, sessionId: {}".format(userdata.id, response_data['sessionId']))
         return HttpResponse(json.dumps(response_data))
@@ -158,3 +157,44 @@ def create_user(request):
         else:
             return HttpResponse(json.dumps(template_incalidcode))
         return HttpResponse(json.dumps(template_success))
+
+
+@csrf_exempt
+@needLogin
+def getUserInfo(request, uid):
+    if request.method == 'POST':
+        uid = uid
+        try:
+            sessionid = request.META['HTTP_SESSIONID']
+        except:
+            sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+
+        #uid = getUserIdFromSessionId(sessionid)
+        if uid:
+            response_data = make_UserInfo(uid=uid)
+            if response_data:
+                return HttpResponse(json.dumps(response_data, cls=CJsonEncoder))
+            else:
+                return HttpResponse("Error")
+
+@csrf_exempt
+@needLogin
+def updateUserInfo(request):
+    if request.method == 'POST':
+        try:
+            sessionid = request.META['HTTP_SESSIONID']
+        except:
+            sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+        response_data = {"state": 0, "info": "用户修改成功"}
+        # old info data
+        uid = getUserIdFromSessionId(sessionid)
+        oldInfo = make_UserInfo(uid)
+        # form
+        username = request.POST.get('username', oldInfo['username'])
+        sex = request.POST.get('sex', oldInfo['sex'])
+        age = request.POST.get('age', oldInfo['age'])
+        email_address = request.POST.get('email_address', oldInfo['email_address'])
+        position = request.POST.get('position', oldInfo['position'])
+        # update
+        update_UserInfo(uid=uid, username=username, sex=sex, age=age, email_address=email_address, position=position)
+        return HttpResponse(json.dumps(response_data))
