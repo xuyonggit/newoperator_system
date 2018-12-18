@@ -3,7 +3,7 @@ import hashlib
 import uuid
 from django.http import HttpResponseRedirect
 from user.models import tb_user, tb_resetpwd, tb_registry_code
-
+from user.session import Mysessionbase
 
 
 # 检查登录状态
@@ -14,7 +14,12 @@ def needLogin(func):
     :return:
     """
     def warpper(request, *args, **kwargs):
-        if request.session.get("is_login", None):
+        try:
+            sessionid = request.META['HTTP_SESSIONID']
+        except:
+            sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+        Mysessionbase().clear_expired()
+        if Mysessionbase(sessionid).exists():
             return func(request, *args, **kwargs)
         else:
             return HttpResponseRedirect("/user/login/")
@@ -122,3 +127,13 @@ def invialdRegistryCode(code):
     except Exception as e:
         print(e)
         pass
+
+
+def create_sessionId(userid, val='gintong'):
+    # M = Mysessionbase()
+    sessionid = Mysessionbase().create(userid=userid, username=val)
+    return sessionid
+
+
+def clearSessionId(sessionid):
+    Mysessionbase().clear(sessionid=sessionid)

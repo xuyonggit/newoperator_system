@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^reset_password/(?P<onlyid>.+)$', ResetPassword),
     # 创建用户
     url(r'^create_user/$', create_user),
+    # 获取个人详情
+    # 修改个人资料
 ]

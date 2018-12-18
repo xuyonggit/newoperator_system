@@ -4,6 +4,7 @@ $(function () {
     }, function () {
         $(this).stop().fadeTo(650, 0.7);
     });
+    
     if ($.cookie("codeusername") != null) {
         // $("#username").val($.cookie("codeusername"));
         // $("#password").val($.cookie("codeppsd"));
@@ -17,7 +18,7 @@ $(function () {
                     ///沒有登錄
                     getLogStatx(2); //没有记录cookies 的登录状态
                 } else {
-                    window.location.href = "/page/index_new";
+                    window.location.href = "/page/index";
                 }
             }
         });
@@ -31,10 +32,7 @@ $(function () {
     });
 
     //// 用户注册
-    $('#registry').click(function () {
-        $("#login_model").hide();
-        $("#registry_model").show();
-    });
+
 
     ////忘记密码
     $("#iforget").click(function () {
@@ -114,7 +112,8 @@ $(function () {
                         if (current.indexOf("index.aspx") > -1) {
                         } else {
                             if (data == "0" || data == "1") {
-                                window.location.href = "/page/index_new";
+                                $.cookie('sessionId', data.sessionId, {path: '/'});
+                                window.location.href = "/page/index";
                             } else {
                                 ot5alert(data, "1");
                             }
@@ -133,10 +132,10 @@ $(function () {
                 dataType:"json",
                 success: function (data) {///去更新cookies
                     if (data.state == "0" || data.state == "1" && issavecookies == "Yes") {
-                        // $.cookie('sessionId', data.sessionId, {path: '/'});
+                        $.cookie('sessionId', data.sessionId, {path: '/'});
                         $.cookie('codeusername', username);
                         $.cookie('codeppsd', userpwd);
-                        window.location.href = "/page/index_new";
+                        window.location.href = "/page/index";
                     } else {
                         swal('登录失败', data.info, 'error');
                     }

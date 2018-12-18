@@ -45,3 +45,11 @@ class tb_registry_code(models.Model):
     registry_code = models.IntegerField('用户ID', default=None)
     # status 0: 正常 1：失效
     status = models.IntegerField('状态', default=0)
+
+
+class session(models.Model):
+    # uid
+    userId = models.IntegerField('userId', default=None)
+    sessionId = models.CharField("sessionId", max_length=255, default=None)
+    # 过期时间
+    expire_date = models.DateTimeField(default=None)
