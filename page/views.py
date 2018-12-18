@@ -1,37 +1,36 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from user.myFunctions import needLogin
+from page.models import url_name
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 
-@needLogin
-@csrf_exempt
 def index(request):
-    contest = {}
-    contest['index'] = '1'
-    return render(request, 'index_test.html', contest)
+    # data = '头号玩家'
+    data = url_name.objects.filter()
+    # print(data.values())
+    for i in data.values():
+        print(i)
+    return render(request, 'index_test.html', context={'data': data.values()})
 
 
-def index_new_2(request):
-    contest = {}
-    contest['index_new_2'] = '1'
-    return render(request, 'index_new_2.html', contest)
+@csrf_exempt
+def names(request):
+    if request.method == 'POST':
+        uname = request.POST.get('uname')
+        links = request.POST.get('links')
+        userdata = url_name.objects.filter(username=uname)
+        print(len(userdata.values()))
+        if len(userdata.values()) == 0:
+            url_name.objects.create(
+                username=uname,
+                urls=links
+            )
+            return HttpResponse(json.dumps({"state": 0}))
 
-
-def index_new_3(request):
-    contest = {}
-    contest['index_new_3'] = '1'
-    return render(request, 'index_new_3.html', contest)
-
-
-def index_new_4(request):
-    contest = {}
-    contest['index_new_4'] = '1'
-    return render(request, 'index_new_4.html', contest)
-
-
-def guanli(request):
-    contest = {}
-    contest['guanli'] = '1'
-    return render(request, 'guanli.html', contest)
+        else:
+            return HttpResponse(json.dumps({"state": 1}))
+    else:
+        return render(request, 'index_test.html')
