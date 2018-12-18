@@ -1,5 +1,7 @@
 # md5
+import datetime
 import hashlib
+import json
 import uuid
 from django.http import HttpResponseRedirect
 from user.models import tb_user, tb_resetpwd, tb_registry_code
@@ -16,8 +18,10 @@ def needLogin(func):
     def warpper(request, *args, **kwargs):
         try:
             sessionid = request.META['HTTP_SESSIONID']
+            if not sessionid:
+                sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
         except:
-            sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+            sessionid = None
         Mysessionbase().clear_expired()
         if Mysessionbase(sessionid).exists():
             return func(request, *args, **kwargs)
@@ -137,3 +141,36 @@ def create_sessionId(userid, val='gintong'):
 
 def clearSessionId(sessionid):
     Mysessionbase().clear(sessionid=sessionid)
+
+
+class CJsonEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj, datetime.date):
+            return obj.strftime("%Y-%m-%d")
+        else:
+            return json.JSONEncoder.default(self, obj)
+
+
+def getUserIdFromSessionId(sessionid):
+    return Mysessionbase().getUidfromSessionId(sessionid)
+
+
+def make_UserInfo(uid):
+    userinfo = tb_user.objects.filter(id=uid).values().first()
+    if userinfo:
+        del userinfo['passwd']
+        return userinfo
+    else:
+        return False
+
+
+def update_UserInfo(uid, username, sex, age, email_address, position=""):
+    tb_user.objects.filter(id=uid).update(
+        username=username,
+        sex=sex,
+        age=age,
+        email_address=email_address,
+        position=position
+    )

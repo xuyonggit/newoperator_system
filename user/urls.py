@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from user.views import Login, Logout, Checkis, ResetPassword, create_user, Registry
+from user.views import *
 
 urlpatterns = [
     url(r'^login/$', Login, name="Login"),
@@ -10,5 +10,7 @@ urlpatterns = [
     # 创建用户
     url(r'^create_user/$', create_user),
     # 获取个人详情
+    url(r'^get_userinfo/(?P<uid>\d)$', getUserInfo),
     # 修改个人资料
+    url(r'^update_userinfo/$', updateUserInfo),
 ]
