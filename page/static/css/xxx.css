@@ -70,6 +70,8 @@
 .a{position:relative;width:500px; height:100px;}
 .b{position:absolute; width:30px; height:30px;top:0;right:0;}
 .c{width:135px; height:35px;float: left;}
+.d{position:absolute; width:100px; height:10px;top:0;right:0;}
+.e{padding: 0;}
 .a-upload  {
     position: absolute;
     font-size: 100px;

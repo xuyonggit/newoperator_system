@@ -29,3 +29,13 @@ function addUser() {
         }
     })
 }
+function openuser() {
+    $.ajax({
+        url: "/user/get_userinfo/3/",
+        method: "post",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+        }
+    })
+}

@@ -163,6 +163,7 @@ def create_user(request):
 @needLogin
 def getUserInfo(request, uid):
     if request.method == 'POST':
+        print(request.POST)
         uid = uid
         try:
             sessionid = request.META['HTTP_SESSIONID']
@@ -172,6 +173,7 @@ def getUserInfo(request, uid):
         #uid = getUserIdFromSessionId(sessionid)
         if uid:
             response_data = make_UserInfo(uid=uid)
+            print(response_data)
             if response_data:
                 return HttpResponse(json.dumps(response_data, cls=CJsonEncoder))
             else:
