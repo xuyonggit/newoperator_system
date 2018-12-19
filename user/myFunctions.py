@@ -16,10 +16,11 @@ def needLogin(func):
     :return:
     """
     def warpper(request, *args, **kwargs):
+        print(request.COOKIES)
         try:
-            sessionid = request.META['HTTP_SESSIONID']
+            sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
             if not sessionid:
-                sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+                sessionid = request.META['HTTP_SESSIONID']
         except:
             sessionid = None
         Mysessionbase().clear_expired()

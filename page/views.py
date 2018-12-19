@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
+@csrf_exempt
+@needLogin
 def index(request):
     # data = '头号玩家'
     data = url_name.objects.filter()
