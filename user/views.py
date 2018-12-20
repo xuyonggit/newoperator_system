@@ -8,7 +8,6 @@ from user.user_email import SendMultiEmail
 from user.myFunctions import *
 
 
-
 @csrf_exempt
 def Login(request):
     """
@@ -16,6 +15,7 @@ def Login(request):
     :param request:
     :errcode    2 ： 密码好像错咯
                 3 ：账号被禁用，请联系系统管理员
+                4 ：账户不存在，请确认大小写以及是否注册成功
     :return:
     """
     if request.method == 'POST':
@@ -25,7 +25,11 @@ def Login(request):
         # 密码加密
         res_passwd = to_md5(passwd)
         # get data from database
-        userdata = tb_user.objects.filter(username=username).get()
+        try:
+            userdata = tb_user.objects.filter(username=username).get()
+        except tb_user.DoesNotExist:
+            response_data = {'state': 4, 'info': '账户不存在，请确认大小写以及是否注册成功'}
+            return HttpResponse(json.dumps(response_data))
         # 初始化返回数据
         response_data = {'state': 0, 'info': 'success'}
         # 密码比对
