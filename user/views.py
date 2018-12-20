@@ -194,11 +194,23 @@ def updateUserInfo(request):
         uid = getUserIdFromSessionId(sessionid)
         oldInfo = make_UserInfo(uid)
         # form
-        username = request.POST.get('username', oldInfo['username'])
+        username = request.POST.get('username')
+        ##
         sex = request.POST.get('sex', oldInfo['sex'])
+        if not sex:
+            sex = oldInfo['sex']
+        ##
         age = request.POST.get('age', oldInfo['age'])
+        if not age:
+            age = oldInfo['age']
+        ##
         email_address = request.POST.get('email_address', oldInfo['email_address'])
+        if not email_address:
+            email_address = oldInfo['email_address']
+        ##
         position = request.POST.get('position', oldInfo['position'])
+        if not position:
+            position = oldInfo['position']
         # update
-        update_UserInfo(uid=uid, username=username, sex=sex, age=age, email_address=email_address, position=position)
+        update_UserInfo(uid=uid, sex=sex, age=age, email_address=email_address, position=position)
         return HttpResponse(json.dumps(response_data))
