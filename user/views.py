@@ -188,15 +188,15 @@ def updateUserInfo(request):
         except:
             sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
         response_data = {"state": 0, "info": "用户修改成功"}
-        # old info data
+        #old info data
         uid = getUserIdFromSessionId(sessionid)
         oldInfo = make_UserInfo(uid)
+        print(request.POST)
         # form
-        username = request.POST.get('username', oldInfo['username'])
         sex = request.POST.get('sex', oldInfo['sex'])
         age = request.POST.get('age', oldInfo['age'])
         email_address = request.POST.get('email_address', oldInfo['email_address'])
         position = request.POST.get('position', oldInfo['position'])
         # update
-        update_UserInfo(uid=uid, username=username, sex=sex, age=age, email_address=email_address, position=position)
+        update_UserInfo(uid=uid, sex=sex, age=age, email_address=email_address, position=position)
         return HttpResponse(json.dumps(response_data))

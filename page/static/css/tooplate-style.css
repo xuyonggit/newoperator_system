@@ -310,7 +310,7 @@ a:focus {
 p:last-child { margin-bottom: 0; }
 
 @media (min-width: 900px) {
-    .container { max-width: 900px; }
+    .container { max-width: 900px; max-height: 350px;}
 }
 
 @media (min-width: 767px) and (max-width: 991px), (max-width: 440px) {
@@ -321,7 +321,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 767px) {
-    .container { max-width: 450px; }
+    .container { max-width: 450px;}
     .content {
         margin-left: auto;
         margin-right: 0;
@@ -338,7 +338,7 @@ p:last-child { margin-bottom: 0; }
 
 @media (max-width: 544px) {    
     .tm-main-content { flex-direction: column; }
-    .details__bg { padding: 55px 40px; }
+    .details__bg { padding: 55px 30px; }
     .slick-dots li button:before { font-size: 15px; }
 
     footer {

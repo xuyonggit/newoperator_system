@@ -102,9 +102,9 @@ img { max-width: 100%; }
 
 .modal-header {
 	padding: 25px 25px 15px 25px;
-	background: #f8fcfe;
+	background: #060305;
 	border: 0;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #060305;
 	-moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
 }
 

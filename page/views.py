@@ -41,3 +41,4 @@ def names(request):
 
     else:
         return render(request, 'index.html')
+

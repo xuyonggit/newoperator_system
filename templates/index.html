@@ -9,6 +9,7 @@
     <title>运维系统</title>
     <!-- load CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300">
+
     <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
       <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static "css/xxx.css" %}" />
@@ -66,17 +67,16 @@
                                     <div class="product">
                                         <div class="tm-nav-link">
                                             <i class="fas fa-adjust fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">运维成员</span>
+                                            <span class="tm-nav-text">调节温度</span>
                                             <div class="product__bg"></div>
                                         </div>
                                         <div class="product__description">
                                             <div class="p-sm-4 p-2">
                                                 <div class="row tm-reverse-sm">
                                                     <div>
-                                                        <h1>用户信息</h1>
-                                                            <div class="c">
-                                                                <a class="btn button button-primary button-rounded button-small">资料修改</a>
-                                                            </div>
+                                                        <div class="c">
+                                                            <a class="btn button button-primary button-rounded button-small">点一下试一试</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,12 +154,70 @@
                         </div>
                     </div>
                 </div>
-                <div class="d"><button id="cco" class="e" onclick="openuser()"><img src="{% static 'img/3.png' %}"></button></div>
+
+                <div class="d">
+                    <button  class="e" data-toggle="modal" data-target="#myModal" onclick="openuser()"><img src="{% static 'img/3.png' %}"></button>
+                    <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                {# 名字 #}
+                                <div  class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-2x fa-times"></i></button>
+                                        <font color="black" >个人信息</font>
+                                </div>
+                                {# 详细信息 #}
+                                <div class="modal-body">
+                                    <div class="g"><font color="black">名字：</font><input class="f" readonly="readonly" id="" /></div>
+                                    <div class="g"><font color="black">年龄：</font><input class="f" readonly="readonly" id="agels" /></div>
+                                    <div class="g"><font color="black">性别：</font><input class="f" readonly="readonly" id="sexls" /></div>
+                                    <div class="g"><font color="black">账号：</font><input class="f" readonly="readonly" id="usernamels" /></div>
+                                    <div class="g"><font color="black">邮箱：</font><input class="f" readonly="readonly" id="email_addressls" /></div>
+                                    <div class="g"><font color="black">职位：</font><input class="f" readonly="readonly" id="positionls" /></div>
+                                </div>
+                                {# 修改信息 #}
+                                <div class="modal-footer">
+                                     <button  class="e btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#myModa" onclick="openuser()">更改</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="modal fade " id="myModa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            {# 名字 #}
+                            <div  class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-2x fa-times"></i></button>
+                                <font color="black" >个人信息</font>
+                            </div>
+                            {# 详细信息 #}
+                            <div class="modal-body">
+                                <form id="makefrom" action="#">
+                                <div class="g"><font color="black">名字：</font><input id="name" name="name" class="f"  /></div>
+                                <div class="g"><font color="black">年龄：</font><input id="age" name="age" class="f"  /></div>
+                                <div class="g"><font color="black">性别：</font><input id="sex" name="sex" class="f"  /></div>
+                                <div class="g"><font color="black">邮箱：</font><input id="email_address" name="email_address" class="f" /></div>
+                                <div class="g"><font color="black">职位：</font><input id="position" name="position" class="f"  /></div>
+                                </form>
+                            </div>
+                            {# 修改信息 #}
+                            <div class="modal-footer">
+                                <button id="ccc" type="button" class="btn btn-primary" onclick="makeUser()">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
+    </div>
+
+
 
 <div id="light" class="white_content">
+    <div class="b">
+          <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+           <font color="#f0ffff"><i class="fas fa-2x fa-times"></i></font></a></div>
 <div class="modal-dialog" role="document">
     <form id="urlform" action='#'>
         <input type="text" id="uname" name="uname" class="form-control" placeholder="名字"  required/>
@@ -168,16 +226,14 @@
     <div class="a">
         <div class="b">
             <button id="conf" class="btn button button-primary button-rounded button-new_small" onclick="addUser()" >保存</button>
-            <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="btn button button-primary button-rounded button-small">
-            <font color="#f0ffff">退出</font>
-            </a>
         </div>
     </div>
 </div>
 </div>
 <div id="fade" class="black_overlay"></div>
 
-
+ <script src="//cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+ <script src="//cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{% static "js/jquery-3.2.1.slim.min.js" %}" ></script>
     <script type="text/javascript" src="{% static "slick/slick.min.js "%}" ></script>
     <script type="text/javascript" src="{% static "js/anime.min.js" %}"></script>
