@@ -8,7 +8,6 @@ from user.user_email import SendMultiEmail
 from user.myFunctions import *
 
 
-
 @csrf_exempt
 def Login(request):
     """
@@ -16,6 +15,7 @@ def Login(request):
     :param request:
     :errcode    2 ： 密码好像错咯
                 3 ：账号被禁用，请联系系统管理员
+                4 ：账户不存在，请确认大小写以及是否注册成功
     :return:
     """
     if request.method == 'POST':
@@ -25,7 +25,11 @@ def Login(request):
         # 密码加密
         res_passwd = to_md5(passwd)
         # get data from database
-        userdata = tb_user.objects.filter(username=username).get()
+        try:
+            userdata = tb_user.objects.filter(username=username).get()
+        except tb_user.DoesNotExist:
+            response_data = {'state': 4, 'info': '账户不存在，请确认大小写以及是否注册成功'}
+            return HttpResponse(json.dumps(response_data))
         # 初始化返回数据
         response_data = {'state': 0, 'info': 'success'}
         # 密码比对
@@ -163,7 +167,6 @@ def create_user(request):
 @needLogin
 def getUserInfo(request, uid):
     if request.method == 'POST':
-        print(request.POST)
         uid = uid
         try:
             sessionid = request.META['HTTP_SESSIONID']
@@ -173,7 +176,6 @@ def getUserInfo(request, uid):
         #uid = getUserIdFromSessionId(sessionid)
         if uid:
             response_data = make_UserInfo(uid=uid)
-            print(response_data)
             if response_data:
                 return HttpResponse(json.dumps(response_data, cls=CJsonEncoder))
             else:
@@ -188,15 +190,27 @@ def updateUserInfo(request):
         except:
             sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
         response_data = {"state": 0, "info": "用户修改成功"}
-        #old info data
+        # old info data
         uid = getUserIdFromSessionId(sessionid)
         oldInfo = make_UserInfo(uid)
-        print(request.POST)
         # form
+        username = request.POST.get('username')
+        ##
         sex = request.POST.get('sex', oldInfo['sex'])
+        if not sex:
+            sex = oldInfo['sex']
+        ##
         age = request.POST.get('age', oldInfo['age'])
+        if not age:
+            age = oldInfo['age']
+        ##
         email_address = request.POST.get('email_address', oldInfo['email_address'])
+        if not email_address:
+            email_address = oldInfo['email_address']
+        ##
         position = request.POST.get('position', oldInfo['position'])
+        if not position:
+            position = oldInfo['position']
         # update
         update_UserInfo(uid=uid, sex=sex, age=age, email_address=email_address, position=position)
         return HttpResponse(json.dumps(response_data))
