@@ -31,7 +31,7 @@ function addUser() {
 }
 function openuser() {
     $.ajax({
-        url: "/user/get_userinfo/3/",
+        url: "/user/get_userinfo/",
         method: "post",
         dataType: "json",
         success: function (data) {
