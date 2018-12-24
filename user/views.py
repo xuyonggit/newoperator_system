@@ -165,15 +165,15 @@ def create_user(request):
 
 @csrf_exempt
 @needLogin
-def getUserInfo(request, uid):
+def getUserInfo(request, uid=None):
     if request.method == 'POST':
         uid = uid
         try:
             sessionid = request.META['HTTP_SESSIONID']
         except:
             sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
-
-        #uid = getUserIdFromSessionId(sessionid)
+        if not isinstance(uid, str):
+            uid = getUserIdFromSessionId(sessionid)
         if uid:
             response_data = make_UserInfo(uid=uid)
             if response_data:
