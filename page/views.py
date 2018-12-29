@@ -5,17 +5,21 @@ from user.myFunctions import needLogin
 from page.models import url_name
 from django.views.decorators.csrf import csrf_exempt
 import json
+from user.myFunctions import getUserIdFromSessionId
 
 
 @csrf_exempt
 @needLogin
 def index(request):
+    #try:
+    #    sessionid = request.META['HTTP_SESSIONID']
+    #except:
+    #    sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
+    #uid = getUserIdFromSessionId(sessionid)
     # data = '头号玩家'
     data = url_name.objects.filter()
-    # print(data.values())
-    for i in data.values():
-        print(i)
-    return render(request, 'index.html', context={'data': data.values()})
+    response_data = data.values()
+    return render(request, 'index.html', context={'data': response_data, 'userid': 3})
 
 
 @csrf_exempt
@@ -37,3 +41,4 @@ def names(request):
 
     else:
         return render(request, 'index.html')
+

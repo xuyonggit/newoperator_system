@@ -19,4 +19,5 @@ from . import views
 
 urlpatterns = [
     url(r'^login/$', views.Index),
+    url(r'^page/$', views.Index),
 ]

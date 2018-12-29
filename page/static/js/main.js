@@ -146,7 +146,7 @@
                 complete: () => {
                     this.DOM.bgDown.style.opacity = 0;
                     this.DOM.bgDown.style.transform = 'none';
-                    this.DOM.productBg.style.opacity = 1;
+
                     this.DOM.details.style.display = 'none';                    
                     this.isAnimating = false;
                 }

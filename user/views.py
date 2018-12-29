@@ -167,6 +167,7 @@ def create_user(request):
 @needLogin
 def getUserInfo(request, uid=None):
     if request.method == 'POST':
+        print(request.POST)
         uid = uid
         try:
             sessionid = request.META['HTTP_SESSIONID']
@@ -176,6 +177,7 @@ def getUserInfo(request, uid=None):
             uid = getUserIdFromSessionId(sessionid)
         if uid:
             response_data = make_UserInfo(uid=uid)
+            print(response_data)
             if response_data:
                 return HttpResponse(json.dumps(response_data, cls=CJsonEncoder))
             else:
@@ -190,12 +192,15 @@ def updateUserInfo(request):
         except:
             sessionid = request.COOKIES['sessionId'].replace("%3D", '=')
         response_data = {"state": 0, "info": "用户修改成功"}
-        # old info data
+        #old info data
         uid = getUserIdFromSessionId(sessionid)
         oldInfo = make_UserInfo(uid)
+        print(request.POST)
         # form
+
         username = request.POST.get('username')
         ##
+
         sex = request.POST.get('sex', oldInfo['sex'])
         if not sex:
             sex = oldInfo['sex']
