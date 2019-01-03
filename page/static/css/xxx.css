@@ -70,7 +70,8 @@
 .a{position:relative;width:500px; height:100px;}
 .b{position:absolute; width:30px; height:30px;top:0;right:0;}
 .c{width:135px; height:35px;float: left;}
-.d{position:absolute; width:100px; height:10px;top:0;right:0;}
+.d{position:absolute; width:80px; height:10px;top:0;right:10px;}
+.j{position:absolute;left: 0;right: 0;top: 0;bottom: 0;}
 .e{padding: 0;}
 .f{ position: relative;padding: 15px;color: #000;font-weight: bolder;border:none;}
 .g{position:relative;width:500px; height:70px;}

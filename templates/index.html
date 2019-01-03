@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
       <link href="{% static "css/sweetalert2.css" %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static "css/xxx.css" %}" />
+    <link rel="stylesheet" href="{% static "css/style-page.css" %}" />
     <link rel="stylesheet" href="{% static "fontawesome/css/fontawesome-all.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "slick/slick.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "slick/slick-theme.css" %}"/>
@@ -26,13 +27,27 @@
     <div id="tm-bg"></div>
     <div id="tm-wrap">
         <div class="tm-main-content">
+
+            <div class="j">
+                        <a href="#" class="nav__dropdown d"><img src="{% static 'img/3.png' %}">
+                          <i class="ui-arrow-down nav__dropdown-trigger"></i>
+                            <ul class="nav__dropdown-menu">
+                                <li><button class="btn button button-primary button-rounded button-new_small2" data-toggle="modal" data-target="#myModal" onclick="openuser()" style="width: 70%">个人信息</button></li>
+                                <li><button class="btn button button-primary button-rounded button-new_small2" style="width: 70%">个人信息</button></li>
+                                <li><button class="btn button button-primary button-rounded button-new_small2" style="width: 70%">个人信息</button></li>
+                                <li><button class="btn button button-primary button-rounded button-new_small2" style="width: 70%">个人信息</button></li>
+                                <li><button class="btn button button-primary button-rounded button-new_small2" style="width: 70%" onclick="window.open('{% url 'Logout' %}')">退出</button></li>
+                            </ul>
+                        </a>
+            </div>
+
             <div class="container tm-site-header-container">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6 col-md-col-xl-6 mb-md-0 mb-sm-4  mb-4 tm-site-header-col ">
                         <div class="left">
                             <a href="http://www.gintong.com/index" target="_blank" ><img src="{% static "img/logo.png" %}" width=40% ></a>
                             <img src="{% static "img/underline.png" %}" class="img-fluid mb-4">
-                            <!img src="{% static "img/1.gif" %}" width=100% height=280px>
+                            <!img src="{% static "img/4.jpg" %}" width=100% height=280px>
                             <p>{{ b }}</p>
                         </div>
                     </div>
@@ -155,8 +170,7 @@
                     </div>
                 </div>
 
-                <div class="d">
-                    <button  class="e" data-toggle="modal" data-target="#myModal" onclick="openuser()"><img src="{% static 'img/3.png' %}"></button>
+
                     <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -166,46 +180,22 @@
                                 </div>
                                 {# 详细信息 #}
                                 <div class="modal-body">
-                                    <div class="g"><font color="black">名字：</font><input class="f" readonly="readonly" id="" /></div>
-                                    <div class="g"><font color="black">年龄：</font><input class="f" readonly="readonly" id="agels" /></div>
-                                    <div class="g"><font color="black">性别：</font><input class="f" readonly="readonly" id="sexls" /></div>
-                                    <div class="g"><font color="black">账号：</font><input class="f" readonly="readonly" id="usernamels" /></div>
-                                    <div class="g"><font color="black">邮箱：</font><input class="f" readonly="readonly" id="email_addressls" /></div>
-                                    <div class="g"><font color="black">职位：</font><input class="f" readonly="readonly" id="positionls" /></div>
+                                    <form id="makefrom" action="#">
+                                    <div class="g"><font color="black">名字：</font><input class="f" id="" name="name"/></div>
+                                    <div class="g"><font color="black">年龄：</font><input class="f" id="age" name="age"/></div>
+                                    <div class="g"><font color="black">性别：</font><input class="f" id="sex" name="sex"/></div>
+                                    <div class="g"><font color="black">账号：</font><input class="f" readonly="readonly" id="username" /></div>
+                                    <div class="g"><font color="black">邮箱：</font><input class="f" id="email_address" name="email_address"/></div>
+                                    <div class="g"><font color="black">职位：</font><input class="f" id="position" name="position"/></div>
+                                     </form>
                                 </div>
                                 {# 修改信息 #}
                                 <div class="modal-footer">
-                                     <button  class="e btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#myModa">更改</button>
+                                     <button id="ccc" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" onclick="makeUser()">更改</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="modal fade " id="myModa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            {# 名字 #}
-                            <div  class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-2x fa-times"></i></button>
-                                <font color="black" >个人信息</font>
-                            </div>
-                            {# 详细信息 #}
-                            <div class="modal-body">
-                                <form id="makefrom" action="#">
-                                <div class="g"><font color="black">名字：</font><input id="name" name="name" class="f"/></div>
-                                <div class="g"><font color="black">年龄：</font><input id="age" name="age" class="f"/></div>
-                                <div class="g"><font color="black">性别：</font><input id="sex" name="sex" class="f"/></div>
-                                <div class="g"><font color="black">邮箱：</font><input id="email_address" name="email_address" class="f"/></div>
-                                <div class="g"><font color="black">职位：</font><input id="position" name="position" class="f"/></div>
-                                </form>
-                            </div>
-                            {# 修改信息 #}
-                            <div class="modal-footer">
-                                <button id="ccc" type="button" class="btn btn-primary" onclick="makeUser()">保存</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>

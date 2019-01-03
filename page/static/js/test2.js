@@ -35,16 +35,16 @@ function openuser() {
         method: "post",
         dataType: "json",
         success: function (data) {
-            $("#usernamels").val(data.username);
-            $("#email_addressls").val(data.email_address);
-            $("#positionls").val(data.position);
-            $("#agels").val(data.age);
+            $("#username").val(data.username);
+            $("#email_address").val(data.email_address);
+            $("#position").val(data.position);
+            $("#age").val(data.age);
             if ( data.sex == 1 ) {
-                $("#sexls").val("男");
+                $("#sex").val("男");
             }else if ( data.sex == 2 ) {
-                $("#sexls").val("女");
+                $("#sex").val("女");
             }else {
-                $("#sexls").val("保密");
+                $("#sex").val("保密");
             }
 
         }

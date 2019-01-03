@@ -1502,9 +1502,16 @@
   border:1px;
   border-color: #666;
   border-style: dashed;
-
 }
 
+.button-new_small2 {
+  font-size: 15px;
+  height: 30px;
+  line-height: 25px;
+  padding:0 16px;
+  background:rgba(1,1,1,0.4);
+
+}
 .button-tiny {
   font-size: 9.6px;
   height: 24px;
