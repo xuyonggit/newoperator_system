@@ -44,11 +44,10 @@ $(function () {
     ///取回密码 
     $("#Retrievenow").click(function () {
         var usrmail = $("#usrmail").val();
-        console.log(usrmail);
         if (!Test_email(usrmail)) {
            // alert(msgggg.pssjs1);
             return false;
-        };
+        }
         $("#sending").show();
         $.ajax({
             type: "POST",
