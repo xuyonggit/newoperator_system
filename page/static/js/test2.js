@@ -51,14 +51,25 @@ function openuser() {
 
     })
 }
-function makeUser() {
+function updateUser() {
     var param_2 = $("#makefrom").serializeArray();
+
+    if (param_2[2]['value'] =="男") {
+        param_2[2]['value']=1
+    }else if (param_2[2]['value'] =="女"){
+        param_2[2]['value']=2
+    }else if (param_2[2]['value'] =="中性"){
+        param_2[2]['value']=3
+    }else {
+        param_2[2]['value']=0
+    }
     $.ajax({
         url: "/user/update_userinfo/",
         method: "post",
         data: param_2,
         dataType: "json",
         success: function (data) {
+
             if (data.state == 0) {
                 swal("成功", data.info, "success")
             } else {
