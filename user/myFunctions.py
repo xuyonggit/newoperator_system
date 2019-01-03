@@ -168,7 +168,6 @@ def make_UserInfo(uid):
 
 
 def update_UserInfo(uid, sex, age, email_address, position=""):
-    print(sex, age, email_address, position)
     tb_user.objects.filter(id=uid).update(
         sex=sex,
         age=age,
